@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  /* High contrast brutalist theme: Black, Yellow, Red */
+  --color-brand-bg: #050505; /* Pure black */
+  --color-brand-ink: #FFFFFF; /* Pure white for high contrast text */
+  --color-brand-orange: #FFE600; /* Cyber Yellow (keeping variable name) */
+  --color-brand-blue: #FF0033; /* Strong Red (keeping variable name) */
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  --color-background: var(--color-brand-bg);
+  --color-foreground: var(--color-brand-ink);
+}
+
+:root {
+  --background: #050505;
+  --foreground: #FFFFFF;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-brand-orange);
+  color: #000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-ink);
+}
+
+/* Utilities for masking animations */
+.mask-text {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.clip-reveal {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+}
