@@ -34,7 +34,7 @@ export default function Navigation() {
           data-cursor="HOME"
         >
           <Image 
-            src="/brand-logo.png" 
+            src="/create-logo-transparent.png" 
             alt="CREATE. Logo" 
             fill 
             className="object-contain object-left"
