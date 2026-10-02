@@ -1,44 +1,47 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white pt-32 pb-12 overflow-hidden relative border-t border-white/10">
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
+    <footer className="bg-black text-white pt-24 pb-12 overflow-hidden border-t border-white/10">
+      <div className="container mx-auto px-6 md:px-12">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-32 border-b-2 border-white/10 pb-32">
-          <div>
-            <Link href="/" className="text-[clamp(4rem,10vw,10rem)] font-display font-extrabold leading-[0.75] tracking-tighter block hover:text-brand-red transition-colors">
-              CREATE<span className="text-brand-red">.</span>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
+          <div className="md:col-span-5">
+            <Link href="/" className="block relative w-48 h-16 mb-8 hover:opacity-80 transition-opacity">
+              <Image 
+                src="/logo.png" 
+                alt="CREATE. Logo" 
+                fill 
+                className="object-contain object-left invert"
+              />
             </Link>
+            <p className="text-xl font-sans font-medium opacity-80 max-w-sm leading-relaxed text-balance">
+              Branding so effective, it feels illegal.
+            </p>
           </div>
           
-          <div className="grid grid-cols-2 gap-8 md:items-end md:justify-items-end text-sm font-bold uppercase tracking-widest">
-            <div className="space-y-4 flex flex-col md:text-right">
-              <Link href="/work" className="hover:text-brand-red transition-colors">WORK</Link>
-              <Link href="/studio" className="hover:text-brand-red transition-colors">STUDIO</Link>
-              <Link href="/labs" className="hover:text-brand-red transition-colors">LABS</Link>
-              <Link href="/social" className="hover:text-brand-red transition-colors">SOCIAL</Link>
-              <Link href="/events" className="hover:text-brand-red transition-colors">EVENTS</Link>
-            </div>
-            
-            <div className="space-y-4 flex flex-col md:text-right">
-              <a href="#" className="hover:text-brand-red transition-colors">INSTAGRAM</a>
-              <a href="#" className="hover:text-brand-red transition-colors">YOUTUBE</a>
-              <a href="#" className="hover:text-brand-red transition-colors">LINKEDIN</a>
-            </div>
+          <div className="md:col-span-2 md:col-start-8 flex flex-col space-y-4 text-sm font-medium tracking-wide">
+            <Link href="/work" className="hover:text-brand-red transition-colors">Work</Link>
+            <Link href="/services" className="hover:text-brand-red transition-colors">Services</Link>
+            <Link href="/studio" className="hover:text-brand-red transition-colors">Studio</Link>
+            <Link href="/labs" className="hover:text-brand-red transition-colors">Labs</Link>
+          </div>
+
+          <div className="md:col-span-2 flex flex-col space-y-4 text-sm font-medium tracking-wide">
+            <Link href="/social" className="hover:text-brand-red transition-colors">Social</Link>
+            <Link href="/events" className="hover:text-brand-red transition-colors">Events</Link>
+            <Link href="/insights" className="hover:text-brand-red transition-colors">Insights</Link>
+            <Link href="/contact" className="hover:text-brand-red transition-colors">Contact</Link>
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-xs font-bold uppercase tracking-widest opacity-50">
-          <p>&copy; {new Date().getFullYear()} CREATE STUDIO. ALL RIGHTS RESERVED.</p>
-          <p>CREATIVE PRODUCTION STUDIO.</p>
-          <Link href="/admin" className="hover:text-brand-red">ADMIN LOGIN</Link>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-medium tracking-widest uppercase opacity-40 border-t border-white/10 pt-8">
+          <p>&copy; {new Date().getFullYear()} CREATE. ALL RIGHTS RESERVED.</p>
+          <div className="flex gap-8">
+            <Link href="/admin" className="hover:text-brand-red transition-colors">Admin Login</Link>
+          </div>
         </div>
-      </div>
-
-      {/* Decorative large background text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-display font-extrabold text-white/5 pointer-events-none whitespace-nowrap">
-        CREATE.
       </div>
     </footer>
   );

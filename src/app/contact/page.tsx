@@ -16,7 +16,7 @@ export default function ContactPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowForm(true);
-    }, 2500);
+    }, 1500); // Faster intro for premium feel
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,25 +45,24 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg text-brand-ink flex items-center justify-center px-6 md:px-12 relative overflow-hidden pt-24 pb-24">
+    <div className="min-h-screen bg-brand-bg text-brand-ink flex items-center justify-center px-6 md:px-12 relative overflow-hidden pt-32 pb-24">
       
-      {/* Intro Transition Sequence */}
+      {/* Intro Transition */}
       <AnimatePresence>
         {!showForm && (
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center bg-brand-ink text-brand-bg z-20"
+            className="absolute inset-0 flex flex-col items-center justify-center bg-black z-20"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
           >
             <motion.h1 
-              className="text-[clamp(4rem,10vw,12rem)] font-display font-extrabold leading-[0.8] text-center"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
+              className="text-4xl md:text-6xl font-display font-bold text-center tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              START<br/>
-              <span className="text-brand-red">SOMETHING.</span>
+              Let's Create <span className="text-brand-red">Something Great.</span>
             </motion.h1>
           </motion.div>
         )}
@@ -71,114 +70,99 @@ export default function ContactPage() {
 
       {/* The Form Section */}
       <motion.div 
-        className="w-full max-w-7xl mx-auto"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: showForm ? 1 : 0, y: showForm ? 0 : 50 }}
-        transition={{ duration: 0.8, delay: 2.5 }}
+        className="w-full max-w-5xl mx-auto"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: showForm ? 1 : 0, y: showForm ? 0 : 40 }}
+        transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
       >
-        <div className="grid md:grid-cols-2 gap-16 md:gap-32">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
+            Tell us what you're building.
+          </h1>
+          <p className="text-white/60 text-lg">
+            Or email us directly at <a href="mailto:createforbrands@gmail.com" className="text-white hover:text-brand-red transition-colors">createforbrands@gmail.com</a>
+          </p>
+        </div>
+
+        <div className="bg-[#050505] p-8 md:p-16 rounded-2xl border border-white/10 shadow-2xl relative">
           
-          <div>
-            <h2 className="text-[clamp(3rem,8vw,8rem)] font-display font-extrabold mb-8 leading-[0.8] uppercase">
-              Let's Talk.
-            </h2>
-            <p className="text-xl md:text-2xl font-bold uppercase tracking-widest text-brand-red mb-16">
-              Tell us what you're building.
-            </p>
-
-            <div className="space-y-12">
-              <div>
-                <div className="text-sm font-sans font-bold uppercase tracking-widest opacity-50 mb-2">Email</div>
-                <a href="mailto:createforbrands@gmail.com" className="text-2xl md:text-3xl font-display font-bold hover:text-brand-red transition-colors">
-                  createforbrands@gmail.com
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[#111] p-8 md:p-12 text-white relative">
-            <div className="absolute top-0 right-0 w-16 h-16 bg-brand-red"></div>
-            
-            {status === "SUCCESS" ? (
-              <motion.div 
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} 
-                className="h-full flex flex-col items-center justify-center text-center py-32"
-              >
-                <div className="w-24 h-24 bg-brand-red text-white rounded-full flex items-center justify-center text-4xl mb-8">✓</div>
-                <h3 className="text-4xl font-display font-bold uppercase mb-4">Got it. Your project is with us.</h3>
-                <p className="text-xl font-medium opacity-70">We'll be in touch soon.</p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-12">
-                {status === "ERROR" && (
-                  <div className="p-4 bg-brand-red/20 border border-brand-red text-white text-sm font-bold uppercase">
-                    Something went wrong. Please try again or email us directly.
-                  </div>
-                )}
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Name *</label>
-                    <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-transparent text-xl font-display font-bold uppercase" placeholder="JOHN DOE" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Company</label>
-                    <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-transparent text-xl font-display font-bold uppercase" placeholder="ACME CORP" />
-                  </div>
+          {status === "SUCCESS" ? (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} 
+              className="flex flex-col items-center justify-center text-center py-24"
+            >
+              <div className="w-20 h-20 bg-brand-red text-white rounded-full flex items-center justify-center text-3xl mb-8 shadow-lg shadow-brand-red/20">✓</div>
+              <h3 className="text-3xl font-display font-bold tracking-tight mb-4">Got it. Your project is with us.</h3>
+              <p className="text-lg text-white/60">We'll be in touch soon.</p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {status === "ERROR" && (
+                <div className="p-4 bg-brand-red/10 border border-brand-red/50 text-brand-red rounded-lg text-sm text-center">
+                  We encountered an issue submitting your request. Please email us directly.
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Email *</label>
-                    <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-transparent text-xl font-display font-bold uppercase" placeholder="JOHN@ACME.COM" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Phone</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-transparent text-xl font-display font-bold uppercase" placeholder="+1 234 567 8900" />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Service</label>
-                    <select name="service" value={formData.service} onChange={handleChange} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-[#111] text-white text-lg font-display font-bold uppercase appearance-none">
-                      <option>COMMERCIALS</option>
-                      <option>BRAND FILMS</option>
-                      <option>PROMOTIONAL CONTENT</option>
-                      <option>REELS / UGC</option>
-                      <option>VISUAL STORYTELLING</option>
-                      <option>LABS / EXPERIMENTAL</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Budget</label>
-                    <select name="budget" value={formData.budget} onChange={handleChange} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-[#111] text-white text-lg font-display font-bold uppercase appearance-none">
-                      <option>Not Specified</option>
-                      <option>Under ₹1,00,000</option>
-                      <option>₹1,00,000 - ₹2,50,000</option>
-                      <option>₹2,50,000 - ₹5,00,000</option>
-                      <option>₹5,00,000+</option>
-                    </select>
-                  </div>
-                </div>
-
+              )}
+              
+              <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest mb-4 opacity-50">Project Details *</label>
-                  <textarea required name="message" value={formData.message} onChange={handleChange} rows={3} className="w-full border-b-2 border-white/20 py-2 focus:outline-none focus:border-brand-red transition-colors bg-transparent resize-none text-xl font-display font-bold uppercase" placeholder="WE NEED TO CREATE..."></textarea>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Name *</label>
+                  <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
                 </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Company</label>
+                  <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                </div>
+              </div>
 
-                <button 
-                  type="submit" 
-                  disabled={status === "SUBMITTING"}
-                  className="w-full py-6 bg-brand-red text-white font-display font-extrabold text-2xl uppercase tracking-widest hover:bg-white hover:text-black transition-colors mt-8 disabled:opacity-50"
-                  data-cursor="SEND"
-                >
-                  {status === "SUBMITTING" ? "SENDING..." : "SUBMIT REQUEST"}
-                </button>
-              </form>
-            )}
-          </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Email *</label>
+                  <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Phone</label>
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                </div>
+              </div>
 
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Service</label>
+                  <select name="service" value={formData.service} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white appearance-none">
+                    <option>Commercials</option>
+                    <option>Brand Films</option>
+                    <option>Promotional Content</option>
+                    <option>Reels / UGC</option>
+                    <option>Visual Storytelling</option>
+                    <option>Labs / Experimental</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Budget</label>
+                  <select name="budget" value={formData.budget} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white appearance-none">
+                    <option>Not Specified</option>
+                    <option>Under ₹1,00,000</option>
+                    <option>₹1,00,000 - ₹2,50,000</option>
+                    <option>₹2,50,000 - ₹5,00,000</option>
+                    <option>₹5,00,000+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Project Details *</label>
+                <textarea required name="message" value={formData.message} onChange={handleChange} rows={5} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white resize-none" placeholder="Tell us about the goals and creative direction..."></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={status === "SUBMITTING"}
+                className="w-full py-4 bg-brand-red text-white font-bold rounded-full hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50 mt-4"
+              >
+                {status === "SUBMITTING" ? "Sending Request..." : "Submit Request"}
+              </button>
+            </form>
+          )}
         </div>
       </motion.div>
     </div>
