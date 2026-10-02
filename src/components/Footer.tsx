@@ -21,18 +21,22 @@ export default function Footer() {
             </p>
           </div>
           
-          <div className="md:col-span-2 md:col-start-8 flex flex-col space-y-4 text-sm font-medium tracking-wide">
-            <Link href="/work" className="hover:text-brand-red transition-colors">Work</Link>
-            <Link href="/services" className="hover:text-brand-red transition-colors">Services</Link>
-            <Link href="/studio" className="hover:text-brand-red transition-colors">Studio</Link>
-            <Link href="/labs" className="hover:text-brand-red transition-colors">Labs</Link>
+          <div className="md:col-span-3 md:col-start-7 flex flex-col space-y-4 text-sm font-medium tracking-wide">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2">Contact</h4>
+            <a href="mailto:createforbrands@gmail.com" className="hover:text-brand-red transition-colors">createforbrands@gmail.com</a>
+            <a href="tel:+919811005532" className="hover:text-brand-red transition-colors">+91 98110 05532</a>
+            <div className="pt-2">
+              <Link href="/contact" className="text-xs font-bold uppercase tracking-widest hover:text-brand-red transition-colors border-b border-white/20 pb-1">Start a Project</Link>
+            </div>
           </div>
 
-          <div className="md:col-span-2 flex flex-col space-y-4 text-sm font-medium tracking-wide">
-            <Link href="/social" className="hover:text-brand-red transition-colors">Social</Link>
-            <Link href="/events" className="hover:text-brand-red transition-colors">Events</Link>
+          <div className="md:col-span-2 md:col-start-11 flex flex-col space-y-4 text-sm font-medium tracking-wide">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-2">Explore</h4>
+            <Link href="/work" className="hover:text-brand-red transition-colors">Work</Link>
+            <Link href="/services" className="hover:text-brand-red transition-colors">Services</Link>
             <Link href="/insights" className="hover:text-brand-red transition-colors">Insights</Link>
-            <Link href="/contact" className="hover:text-brand-red transition-colors">Contact</Link>
+            <Link href="/about" className="hover:text-brand-red transition-colors">About</Link>
+            <Link href="/why-choose-us" className="hover:text-brand-red transition-colors">Why Choose Us</Link>
           </div>
         </div>
         

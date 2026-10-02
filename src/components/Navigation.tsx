@@ -18,10 +18,7 @@ export default function Navigation() {
   const navLinks = [
     { name: "Work", href: "/work" },
     { name: "Services", href: "/services" },
-    { name: "Studio", href: "/studio" },
-    { name: "Labs", href: "/labs" },
-    { name: "Social", href: "/social" },
-    { name: "Events", href: "/events" },
+    { name: "About", href: "/about" },
     { name: "Insights", href: "/insights" },
   ];
 
@@ -30,9 +27,10 @@ export default function Navigation() {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-4 bg-black/80 backdrop-blur-xl' : 'py-8 md:py-12'} px-6 md:px-12 pointer-events-none flex justify-between items-center`}>
         <Link 
           href="/" 
-          className="pointer-events-auto relative w-32 md:w-48 h-16 md:h-20 mix-blend-difference opacity-90 hover:opacity-100 transition-opacity"
+          className="pointer-events-auto relative w-32 md:w-48 h-16 md:h-20 opacity-90 hover:opacity-100 transition-opacity"
           data-cursor="HOME"
         >
+          {/* Removed mix-blend-difference to fix the unwanted visible box/container around the logo */}
           <Image 
             src="/create-logo-transparent.png" 
             alt="CREATE. Logo" 
@@ -45,7 +43,7 @@ export default function Navigation() {
         <div className="flex items-center pointer-events-auto">
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="group flex flex-col items-end gap-[5px] p-2 mix-blend-difference"
+            className="group flex flex-col items-end gap-[5px] p-2"
             data-cursor={isOpen ? "CLOSE" : "MENU"}
           >
             <motion.div 
@@ -73,7 +71,7 @@ export default function Navigation() {
       >
         <Link 
           href="/contact"
-          className="bg-brand-red text-white px-8 py-4 font-sans font-medium tracking-wide text-sm hover:bg-white hover:text-black transition-all duration-300 rounded-full shadow-2xl"
+          className="bg-brand-red text-white px-8 py-4 font-sans font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all duration-300 rounded-full shadow-2xl"
           data-cursor="LET'S TALK"
         >
           Start a Project
@@ -88,10 +86,12 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-black text-white flex flex-col justify-center px-12 md:px-24"
+            className="fixed inset-0 z-40 bg-black text-white flex flex-col px-6 md:px-24 pt-32 md:pt-40 pb-12 overflow-y-auto"
           >
-            <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center">
-              <nav className="flex flex-col space-y-4">
+            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start my-auto">
+              
+              {/* Left Column: Primary Navigation */}
+              <nav className="flex flex-col space-y-1 md:space-y-2">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.name}
@@ -102,7 +102,7 @@ export default function Navigation() {
                   >
                     <Link
                       href={link.href}
-                      className="text-4xl md:text-6xl font-display font-bold hover:text-brand-red transition-colors tracking-tight inline-block"
+                      className="text-[clamp(2rem,4vw,3.5rem)] font-display font-bold hover:text-brand-red transition-colors tracking-tight inline-block leading-tight"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
@@ -111,31 +111,34 @@ export default function Navigation() {
                 ))}
               </nav>
 
+              {/* Right Column: Contact & Social */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="hidden md:flex flex-col gap-8 border-l border-white/10 pl-16"
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="flex flex-col gap-10 md:gap-12 md:border-l md:border-white/10 md:pl-16 py-4"
               >
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-4">Start Something</h4>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">Start Something</h4>
                   <Link
                     href="/contact"
-                    className="text-2xl font-sans text-white hover:text-brand-red transition-colors"
+                    className="text-[clamp(1.5rem,3vw,2rem)] font-display font-bold text-white hover:text-brand-red transition-colors tracking-tight flex items-center gap-4 group"
                     onClick={() => setIsOpen(false)}
                   >
-                    Let's Talk →
+                    Let's Talk <span className="group-hover:translate-x-2 transition-transform">→</span>
                   </Link>
                 </div>
+                
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-red mb-4">Social</h4>
-                  <div className="flex flex-col gap-2">
-                    <a href="#" className="hover:text-brand-red transition-colors">Instagram</a>
-                    <a href="#" className="hover:text-brand-red transition-colors">LinkedIn</a>
-                    <a href="#" className="hover:text-brand-red transition-colors">Vimeo</a>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">Social</h4>
+                  <div className="flex flex-col gap-3">
+                    <a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">Instagram</a>
+                    <a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">LinkedIn</a>
+                    <a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">Vimeo</a>
                   </div>
                 </div>
               </motion.div>
+              
             </div>
           </motion.div>
         )}

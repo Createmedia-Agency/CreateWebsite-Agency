@@ -12,8 +12,12 @@ const display = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "CREATE | Creative Marketing Agency",
-  description: "We create brands people remember.",
+  title: {
+    template: "%s | CREATE",
+    default: "Creative Production Studio for Commercials, Branded Content & Campaigns | CREATE",
+  },
+  description: "CREATE is a creative production studio focused on commercials, branded content, campaigns, and visual storytelling.",
+  keywords: ["creative production studio", "commercial production company", "branded content studio", "campaign production agency", "visual storytelling studio", "creative production company"],
 };
 
 export default function RootLayout({
@@ -23,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${sans.variable} ${display.variable}`}>
-      <body className="bg-brand-bg text-brand-ink min-h-screen flex flex-col relative antialiased selection:bg-brand-orange selection:text-black">
+      <body className="bg-brand-bg text-brand-ink min-h-screen flex flex-col relative antialiased">
         <CustomCursor />
         <Navigation />
         <main className="flex-grow">{children}</main>

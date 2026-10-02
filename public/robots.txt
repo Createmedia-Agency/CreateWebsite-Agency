@@ -1,0 +1,11 @@
+# Instruct search engines not to index admin or API routes.
+# NOTE: robots.txt is NOT a security mechanism — actual auth is enforced server-side.
+
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://createforbrands.com/sitemap.xml

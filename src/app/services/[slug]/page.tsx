@@ -1,71 +1,129 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Script from "next/script";
 
-// Mock CMS data for services based on the PDF
-const serviceData = {
-  "creative-advertising": {
-    title: "Creative Advertising That Gets Attention",
-    seoTitle: "Creative Advertising Agency | Ad Campaigns & Strategy",
-    description: "Full-funnel creative advertising campaigns designed to capture attention and drive measurable performance.",
-    keywords: ["creative advertising agency", "advertising creative agency", "creative advertising services", "creative advertising company", "creative advertising firms", "creative ad agency", "ad creative agency", "advertising and design agency"],
-    problem: "Most ads are ignored. In a saturated digital landscape, generic creative wastes budget and damages brand perception.",
-    solution: "We build creative advertising campaigns that interrupt the feed, resonate emotionally, and convert efficiently.",
-    deliverables: [
-      "Campaign Strategy",
-      "Ad Creative",
-      "Meta Advertising",
-      "Google Advertising",
-      "Video Advertising",
-      "Retargeting",
-      "Campaign Optimization",
-      "Performance Reporting"
-    ],
-    results: [
-      { metric: "3x", label: "ROAS Improvement" },
-      { metric: "-40%", label: "CPA Reduction" }
-    ]
+const servicesData = {
+  "brand-visual-design": {
+    name: "Brand & Visual Design",
+    title: "Visual Design That Supports the Story",
+    seoTitle: "Creative Design & Brand Visuals",
+    description: "Build a stronger visual identity with CREATE. We create brand visuals, campaign design, key visuals, and creative assets.",
+    keywords: ["creative design studio", "brand design agency", "campaign design"],
+    intro: "Design should not exist only to make something look good. It should help the idea communicate. CREATE develops visual systems for campaigns, content, advertising, and brand communication.",
+    whatWeDo: ["Visual Identity", "Campaign Design", "Key Visuals", "Advertising Creative", "Social Media Design", "Motion Design", "Brand Guidelines"],
+    portfolioLink: "/work?filter=design",
+    order: 1
   },
-  "branding": {
-    title: "Branding, Design & Creative That Builds Recognition",
-    seoTitle: "Marketing Design & Branding Agency | Visual Identity",
-    description: "Strategic branding and visual identity design that differentiates your company in the market.",
-    keywords: ["marketing design agency", "advertising and design agency", "branding and advertising agency", "advertising and branding agency"],
-    problem: "Brands without a clear visual identity and strategy struggle to build trust and command premium pricing.",
-    solution: "We develop comprehensive brand systems that are visually striking and strategically aligned with your business goals.",
-    deliverables: [
-      "Brand Strategy",
-      "Visual Identity",
-      "Logo Design",
-      "Brand Guidelines",
-      "Campaign Design",
-      "Social Media Design",
-      "Advertising Creative"
-    ],
-    results: [
-      { metric: "100%", label: "Brand Consistency" },
-      { metric: "New", label: "Market Positioning" }
-    ]
+  "branded-content": {
+    name: "Branded Content",
+    title: "Give Your Brand Something Worth Watching.",
+    seoTitle: "Branded Content Studio",
+    description: "CREATE creates branded films, product stories, creator content, and campaign content built around your brand and audience.",
+    keywords: ["branded content studio", "branded content production", "brand storytelling"],
+    intro: "Branded content should feel like content first and advertising second. CREATE develops branded stories around the audience, the brand, and the idea.",
+    whatWeDo: ["Branded Films", "Product Stories", "Creator-Led Content", "Social Video", "Promotional Content", "Campaign Content"],
+    portfolioLink: "/work?filter=branded-content",
+    order: 2
   },
-  "digital-marketing": {
-    title: "Digital Marketing That Accelerates Growth",
-    seoTitle: "Creative Digital Marketing Agency | Growth Strategy",
-    description: "Integrated digital marketing strategies combining performance, content, and creative.",
-    keywords: ["digital marketing creative agency", "creative digital marketing agencies", "creative digital marketing agency", "marketing agency company"],
-    problem: "Siloed marketing efforts lead to disjointed customer experiences and inefficient spend.",
-    solution: "A unified digital marketing approach that aligns creative output with performance data.",
-    deliverables: [
-      "Digital Strategy",
-      "Funnel Optimization",
-      "Analytics & Tracking",
-      "Multi-channel Campaigns",
-      "Conversion Rate Optimization"
-    ],
-    results: [
-      { metric: "200+", label: "Leads Generated" },
-      { metric: "₹5", label: "CPL Achieved" }
-    ]
+  "campaign-production": {
+    name: "Campaign Production",
+    title: "Campaigns Built From Idea to Execution",
+    seoTitle: "Campaign Production Agency",
+    description: "CREATE develops campaign concepts and produces creative assets across films, digital content, social platforms, and campaign touchpoints.",
+    keywords: ["campaign production agency", "advertising campaign production", "creative campaign studio"],
+    intro: "A campaign rarely lives in one format. CREATE develops campaign concepts and produces the creative assets needed across films, digital content, social platforms, and other campaign touchpoints.",
+    whatWeDo: ["Campaign Concepts", "Creative Direction", "Commercial Production", "Content Production", "Campaign Assets", "Social Cutdowns"],
+    portfolioLink: "/work?filter=campaigns",
+    order: 3
+  },
+  "commercial-production": {
+    name: "Commercial Production",
+    title: "Commercials Built Around Ideas",
+    seoTitle: "Commercial Production Company",
+    description: "CREATE produces commercials around clear ideas, strong stories, and purposeful visual direction, from concept through final delivery.",
+    keywords: ["commercial production company", "commercial video production", "advertising film production"],
+    intro: "A commercial has seconds to make an impression. CREATE develops and produces commercial work around a clear idea, strong story, and purposeful visual direction.",
+    whatWeDo: ["Creative Concepts", "Scripts", "Storyboards", "Creative Direction", "Production", "Direction", "Editing", "Motion", "Colour", "Sound", "Final Delivery"],
+    portfolioLink: "/work?filter=commercials",
+    order: 4
+  },
+  "content-marketing": {
+    name: "Content Marketing",
+    title: "Content With a Purpose",
+    seoTitle: "Content Marketing Services",
+    description: "CREATE combines content strategy and creative production to help brands communicate through stories, video, social content, and more.",
+    keywords: ["content marketing agency", "content marketing services", "brand content strategy"],
+    intro: "Content marketing connects useful ideas with the right audience. CREATE combines creative production with content planning to help brands communicate through stories, videos, social content, articles, and other formats.",
+    whatWeDo: ["Content Strategy", "Content Planning", "Brand Content", "Video Content", "Social Content", "Campaign Content", "Content Distribution"],
+    portfolioLink: "/work",
+    order: 5
+  },
+  "creative-direction": {
+    name: "Creative Direction",
+    title: "One Creative Direction. Every Detail Connected.",
+    seoTitle: "Creative Direction Services",
+    description: "CREATE shapes concepts, visual language, story, tone, and execution so every part of a creative project feels connected.",
+    keywords: ["creative direction agency", "creative direction services", "creative studio"],
+    intro: "Creative direction gives the work a point of view. CREATE shapes the visual language, story, tone, composition, and execution so every part of a project feels connected.",
+    whatWeDo: ["Concept Development", "Visual Direction", "Story Development", "Moodboards", "Art Direction", "Production Direction", "Creative Review"],
+    portfolioLink: "/work",
+    order: 6
+  },
+  "performance-marketing": {
+    name: "Performance Marketing",
+    title: "Creative That Can Perform.",
+    seoTitle: "Performance Marketing Services",
+    description: "CREATE connects creative production with paid campaigns, audience targeting, testing, optimisation, and performance reporting.",
+    keywords: ["performance marketing agency", "performance marketing services", "paid advertising"],
+    intro: "Performance marketing connects creative work with measurable campaign goals. CREATE can combine creative production with paid campaign planning, audience targeting, testing, optimisation, and reporting.",
+    whatWeDo: ["Meta Ads", "Google Ads", "Campaign Strategy", "Audience Targeting", "Creative Testing", "Campaign Optimisation", "Performance Reporting"],
+    portfolioLink: "/work",
+    order: 7
+  },
+  "post-production": {
+    name: "Post-Production",
+    title: "The Final Frame Matters.",
+    seoTitle: "Post-Production Studio",
+    description: "CREATE brings editing, motion, colour, sound, visual effects, and finishing together to shape the final creative output.",
+    keywords: ["post-production studio", "video editing services", "motion graphics studio"],
+    intro: "Production captures the material. Post-production shapes the final experience. CREATE brings footage, design, motion, colour, sound, and finishing together for the final output.",
+    whatWeDo: ["Video Editing", "Motion Graphics", "Animation", "Colour Grading", "Sound Design", "Visual Effects", "Social Cutdowns", "Final Mastering"],
+    portfolioLink: "/work",
+    order: 8
+  },
+  "social-media-marketing": {
+    name: "Social Media Marketing",
+    title: "Social Content Built Around the Brand.",
+    seoTitle: "Social Media Marketing Agency",
+    description: "CREATE combines social strategy and creative production to build content that fits the platform, audience, and brand.",
+    keywords: ["social media marketing agency", "social media management", "social media strategy"],
+    intro: "Social media needs more than frequent posting. CREATE combines creative production with social strategy to build content that fits the platform, the audience, and the brand.",
+    whatWeDo: ["Social Strategy", "Content Planning", "Social Campaigns", "Reels", "UGC", "Creator Content", "Community Content", "Performance Tracking"],
+    portfolioLink: "/work?filter=social",
+    order: 9
+  },
+  "visual-storytelling": {
+    name: "Visual Storytelling",
+    title: "Stories People Can See.",
+    seoTitle: "Visual Storytelling Studio",
+    description: "CREATE uses film, photography, design, motion, sound, and creative direction to turn ideas into clear visual stories.",
+    keywords: ["visual storytelling studio", "visual storytelling agency", "brand storytelling"],
+    intro: "Visual storytelling turns ideas into experiences. CREATE uses film, photography, design, motion, sound, and creative direction to build stories that communicate clearly and leave a lasting impression.",
+    whatWeDo: ["Brand Films", "Commercial Films", "Promotional Videos", "Photography", "Motion", "Campaign Visuals", "Story Development"],
+    portfolioLink: "/work?filter=films",
+    order: 10
+  },
+  "website-development": {
+    name: "Website Development",
+    title: "Websites Built for Brands and Business.",
+    seoTitle: "Website Development Services",
+    description: "CREATE develops websites that bring brand identity, content, user experience, SEO foundations, and business goals together.",
+    keywords: ["website development company", "website development agency", "business website development"],
+    intro: "A website should do more than look good. CREATE develops websites that bring brand identity, content, user experience, and business goals together.",
+    whatWeDo: ["Website Design", "Website Development", "Landing Pages", "Responsive Development", "CMS Integration", "SEO Foundations", "Conversion-Focused Pages"],
+    portfolioLink: "/work",
+    order: 11
   }
 };
 
@@ -74,109 +132,119 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = serviceData[params.slug as keyof typeof serviceData];
+  const service = servicesData[params.slug as keyof typeof servicesData];
   if (!service) return { title: "Service Not Found" };
 
   return {
     title: `${service.seoTitle} | CREATE`,
     description: service.description,
     keywords: service.keywords.join(", "),
+    alternates: {
+      canonical: `https://createforbrands.com/services/${params.slug}`
+    }
   };
 }
 
+export function generateStaticParams() {
+  return Object.keys(servicesData).map((slug) => ({
+    slug: slug,
+  }));
+}
+
 export default function ServicePage({ params }: Props) {
-  const service = serviceData[params.slug as keyof typeof serviceData];
+  const service = servicesData[params.slug as keyof typeof servicesData];
   
   if (!service) {
-    // If we haven't mocked it yet, show a generic one or 404
-    // For this implementation we will fallback to a generic version
+    notFound();
   }
 
-  const data = service || {
-    title: `${params.slug.replace("-", " ").toUpperCase()}`,
-    description: "Premium creative marketing services for growing brands.",
-    problem: "Generic marketing fails to capture attention.",
-    solution: "Strategic, creative-led approaches that drive results.",
-    deliverables: ["Strategy", "Execution", "Optimization", "Reporting"],
-    results: [{ metric: "10x", label: "ROI" }]
+  // Schema generation
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": service.name,
+    "provider": {
+      "@type": "Organization",
+      "name": "CREATE",
+      "url": "https://createforbrands.com"
+    },
+    "description": service.description
   };
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-32 pb-24 min-h-screen bg-brand-bg text-brand-ink transition-colors duration-1000">
+      {/* Schema */}
+      <Script
+        id={`schema-${params.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      
       {/* Hero */}
-      <section className="px-6 md:px-12 mb-24 container mx-auto">
+      <section className="px-6 md:px-12 mb-32 container mx-auto max-w-7xl pt-16">
         <div className="max-w-4xl">
-          <Link href="/services" className="text-brand-accent font-medium mb-8 inline-block hover:underline">
+          <Link 
+            href="/services" 
+            className="text-brand-red font-bold uppercase tracking-widest text-xs mb-8 inline-block hover:opacity-70 transition-opacity"
+          >
             ← All Services
           </Link>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold leading-[1.1] mb-8 text-balance">
-            {data.title}
+          <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight leading-tight mb-8">
+            {service.title}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl text-balance">
-            {data.description}
+          <p className="text-xl md:text-2xl text-white/70 font-medium leading-relaxed max-w-3xl">
+            {service.intro}
           </p>
         </div>
       </section>
 
-      {/* Problem / Solution */}
-      <section className="px-6 md:px-12 mb-32 container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
-          <div>
-            <h3 className="text-sm font-mono text-gray-500 uppercase tracking-widest mb-4">The Challenge</h3>
-            <p className="text-2xl md:text-3xl font-medium leading-relaxed">
-              {data.problem}
-            </p>
-          </div>
-          <div>
-            <h3 className="text-sm font-mono text-brand-accent uppercase tracking-widest mb-4">Our Approach</h3>
-            <p className="text-2xl md:text-3xl font-medium leading-relaxed">
-              {data.solution}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Deliverables */}
-      <section className="px-6 md:px-12 py-32 bg-brand-black text-brand-offwhite mb-32">
-        <div className="container mx-auto">
-          <h2 className="text-4xl md:text-6xl font-display font-bold mb-16">Deliverables.</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {data.deliverables.map((item, i) => (
-              <div key={i} className="border-t border-gray-800 pt-6">
-                <div className="text-brand-accent font-mono text-sm mb-4">0{i + 1}</div>
-                <div className="text-xl font-bold">{item}</div>
+      {/* What We Do */}
+      <section className="px-6 md:px-12 mb-32 container mx-auto max-w-7xl">
+        <div className="border-t border-white/10 pt-16">
+          <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight mb-16">
+            What We Do
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+            {service.whatWeDo.map((item, i) => (
+              <div key={i} className="border-t border-white/5 pt-4">
+                <h3 className="text-xl font-sans font-medium text-white/90">{item}</h3>
               </div>
             ))}
           </div>
         </div>
+        
+        <p className="text-white/50 text-lg mt-16 max-w-3xl">
+          Our approach connects the brief, audience, creative idea, and final execution. The exact scope depends on the project and should be confirmed before work begins.
+        </p>
       </section>
 
-      {/* Results */}
-      <section className="px-6 md:px-12 mb-32 container mx-auto text-center">
-        <h2 className="text-4xl md:text-6xl font-display font-bold mb-16">The Impact.</h2>
-        <div className="flex flex-col md:flex-row justify-center gap-16 md:gap-32">
-          {data.results.map((res, i) => (
-            <div key={i}>
-              <div className="text-7xl md:text-9xl font-display font-extrabold text-brand-accent mb-4">
-                {res.metric}
-              </div>
-              <div className="text-xl font-bold uppercase tracking-widest">
-                {res.label}
-              </div>
-            </div>
-          ))}
+      {/* Selected Work */}
+      <section className="px-6 md:px-12 mb-32 container mx-auto max-w-7xl">
+        <div className="bg-[#050505] p-12 md:p-16 border border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          <div>
+            <h2 className="text-3xl font-display font-bold mb-4">Selected Work</h2>
+            <p className="text-white/60 text-lg max-w-xl">
+              Explore how we've applied {service.name.toLowerCase()} to real projects and campaigns.
+            </p>
+          </div>
+          <Link 
+            href={service.portfolioLink}
+            className="inline-block bg-white text-black px-8 py-4 font-bold uppercase tracking-widest text-xs hover:bg-brand-red hover:text-white transition-colors rounded-full shrink-0"
+          >
+            View Our Work
+          </Link>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="px-6 md:px-12 container mx-auto text-center">
-        <div className="bg-brand-cream py-24 px-8 rounded-3xl">
-          <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">Ready to start?</h2>
+      <section className="px-6 md:px-12 container mx-auto max-w-7xl text-center">
+        <div className="border-t border-white/10 pt-32 pb-16">
+          <h2 className="text-4xl md:text-6xl font-display font-bold mb-12">Ready to create?</h2>
           <Link 
             href="/contact" 
-            className="inline-flex items-center gap-4 px-10 py-5 bg-brand-black text-white rounded-full text-lg font-bold hover:bg-brand-accent transition-colors"
+            className="inline-block bg-brand-red text-white px-12 py-5 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors rounded-full shadow-2xl"
           >
-            Start Your Project <ArrowRight className="w-5 h-5" />
+            Start a Project
           </Link>
         </div>
       </section>

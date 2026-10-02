@@ -10,7 +10,7 @@ export default function ContactPage() {
   const [status, setStatus] = useState<"IDLE" | "SUBMITTING" | "SUCCESS" | "ERROR">("IDLE");
   const [formData, setFormData] = useState({
     name: "", company: "", email: "", phone: "", website: "",
-    service: "COMMERCIALS", projectType: "", budget: "", message: ""
+    projectType: "", budget: "", message: "", _gotcha: ""
   });
 
   useEffect(() => {
@@ -51,18 +51,18 @@ export default function ContactPage() {
       <AnimatePresence>
         {!showForm && (
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center bg-black z-20"
+            className="absolute inset-0 flex flex-col items-center justify-center bg-black z-20 px-6"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: "easeInOut" }}
           >
             <motion.h1 
-              className="text-4xl md:text-6xl font-display font-bold text-center tracking-tight"
+              className="text-4xl md:text-6xl font-display font-bold text-center tracking-tight text-balance max-w-4xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              Let's Create <span className="text-brand-red">Something Great.</span>
+              Let's Create Something Worth Watching.
             </motion.h1>
           </motion.div>
         )}
@@ -70,99 +70,123 @@ export default function ContactPage() {
 
       {/* The Form Section */}
       <motion.div 
-        className="w-full max-w-5xl mx-auto"
+        className="w-full max-w-7xl mx-auto"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: showForm ? 1 : 0, y: showForm ? 0 : 40 }}
         transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
       >
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight mb-4">
-            Tell us what you're building.
-          </h1>
-          <p className="text-white/60 text-lg">
-            Or email us directly at <a href="mailto:createforbrands@gmail.com" className="text-white hover:text-brand-red transition-colors">createforbrands@gmail.com</a>
-          </p>
-        </div>
-
-        <div className="bg-[#050505] p-8 md:p-16 rounded-2xl border border-white/10 shadow-2xl relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           
-          {status === "SUCCESS" ? (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} 
-              className="flex flex-col items-center justify-center text-center py-24"
-            >
-              <div className="w-20 h-20 bg-brand-red text-white rounded-full flex items-center justify-center text-3xl mb-8 shadow-lg shadow-brand-red/20">✓</div>
-              <h3 className="text-3xl font-display font-bold tracking-tight mb-4">Got it. Your project is with us.</h3>
-              <p className="text-lg text-white/60">We'll be in touch soon.</p>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {status === "ERROR" && (
-                <div className="p-4 bg-brand-red/10 border border-brand-red/50 text-brand-red rounded-lg text-sm text-center">
-                  We encountered an issue submitting your request. Please email us directly.
-                </div>
-              )}
+          {/* Left Column: Intro */}
+          <div className="lg:col-span-5 sticky top-32">
+            <h1 className="text-5xl md:text-6xl font-display font-bold tracking-tight mb-8 leading-tight">
+              Let's Create Something Worth Watching.
+            </h1>
+            <p className="text-xl md:text-2xl text-white/70 font-medium mb-6 leading-relaxed">
+              Tell us what you're building.
+            </p>
+            <p className="text-white/50 text-lg leading-relaxed">
+              We'll bring the research, creative thinking, production, and execution together to help turn the idea into finished work.
+            </p>
+          </div>
+
+          {/* Right Column: Form and Contact Details */}
+          <div className="lg:col-span-7 bg-[#050505] p-8 md:p-16 border border-white/5 relative">
+            
+            <div className="mb-16 pb-12 border-b border-white/10">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-brand-red mb-8">Start a Conversation</h2>
               
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid sm:grid-cols-2 gap-8 text-lg font-medium">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Name *</label>
-                  <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Email</div>
+                  <a href="mailto:createforbrands@gmail.com" className="hover:text-brand-red transition-colors">createforbrands@gmail.com</a>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Company</label>
-                  <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Email *</label>
-                  <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Phone</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Phone</div>
+                  <a href="tel:+919811005532" className="hover:text-brand-red transition-colors">+91 98110 05532</a>
                 </div>
               </div>
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Service</label>
-                  <select name="service" value={formData.service} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white appearance-none">
-                    <option>Commercials</option>
-                    <option>Brand Films</option>
-                    <option>Promotional Content</option>
-                    <option>Reels / UGC</option>
-                    <option>Visual Storytelling</option>
-                    <option>Labs / Experimental</option>
-                  </select>
+            <p className="text-white/60 mb-12 text-lg">Tell us about the project, what you need, and where you are in the process.</p>
+
+            {status === "SUCCESS" ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} 
+                className="flex flex-col items-center justify-center text-center py-24"
+              >
+                <div className="w-20 h-20 bg-brand-red text-white rounded-full flex items-center justify-center text-3xl mb-8 shadow-lg shadow-brand-red/20">✓</div>
+                <h3 className="text-3xl font-display font-bold tracking-tight mb-4">Got it. Your project is with us.</h3>
+                <p className="text-lg text-white/60">We'll be in touch soon.</p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {status === "ERROR" && (
+                  <div className="p-4 bg-brand-red/10 border border-brand-red/50 text-brand-red text-sm text-center">
+                    We encountered an issue submitting your request. Please email us directly at createforbrands@gmail.com.
+                  </div>
+                )}
+                
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Name *</label>
+                    <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Company</label>
+                    <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  </div>
                 </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Email *</label>
+                    <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Phone</label>
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Website</label>
+                    <input type="text" name="website" value={formData.website} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Project Type</label>
+                    <input type="text" name="projectType" value={formData.projectType} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" placeholder="e.g. Commercial, Campaign..." />
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Budget</label>
-                  <select name="budget" value={formData.budget} onChange={handleChange} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white appearance-none">
-                    <option>Not Specified</option>
-                    <option>Under ₹1,00,000</option>
-                    <option>₹1,00,000 - ₹2,50,000</option>
-                    <option>₹2,50,000 - ₹5,00,000</option>
-                    <option>₹5,00,000+</option>
-                  </select>
+                  <input type="text" name="budget" value={formData.budget} onChange={handleChange} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white" placeholder="What is the expected scope?" />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Project Details *</label>
-                <textarea required name="message" value={formData.message} onChange={handleChange} rows={5} className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white resize-none" placeholder="Tell us about the goals and creative direction..."></textarea>
-              </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest mb-2 text-white/50">Project Details *</label>
+                  <textarea required name="message" value={formData.message} onChange={handleChange} rows={5} className="w-full bg-[#111] border border-white/10 px-4 py-3 focus:outline-none focus:border-brand-red transition-colors text-white resize-none" placeholder="Tell us about the goals and creative direction..."></textarea>
+                </div>
 
-              <button 
-                type="submit" 
-                disabled={status === "SUBMITTING"}
-                className="w-full py-4 bg-brand-red text-white font-bold rounded-full hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50 mt-4"
-              >
-                {status === "SUBMITTING" ? "Sending Request..." : "Submit Request"}
-              </button>
-            </form>
-          )}
+                {/* Honeypot — invisible to real users, catches bots */}
+                <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true" tabIndex={-1}>
+                  <label htmlFor="_gotcha">Do not fill this</label>
+                  <input type="text" id="_gotcha" name="_gotcha" value={formData._gotcha} onChange={handleChange} autoComplete="off" tabIndex={-1} />
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={status === "SUBMITTING"}
+                  className="w-full py-5 bg-white text-black font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:text-white transition-all duration-300 disabled:opacity-50 mt-4 rounded-none"
+                >
+                  {status === "SUBMITTING" ? "Sending..." : "Start a Conversation"}
+                </button>
+              </form>
+            )}
+          </div>
+
         </div>
       </motion.div>
     </div>
