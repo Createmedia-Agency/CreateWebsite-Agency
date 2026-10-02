@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="md:col-span-5">
             <Link href="/" className="block relative w-48 h-32 mb-8 hover:opacity-80 transition-opacity">
               <Image 
-                src="/logo.png" 
+                src="/brand-logo.png" 
                 alt="CREATE. Logo" 
                 fill 
                 className="object-contain object-left"
