@@ -4,86 +4,92 @@ import Link from "next/link";
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const title = params.slug.split('-').map(w => w.toUpperCase()).join(' ');
   return {
-    title: `${title} | Concept Project by CREATE`,
-    description: `Explore the fictional creative concept and art direction for ${title}.`,
+    title: `${title} | CREATE.`,
+    description: `Creative production case study for ${title}.`,
   };
 }
 
-export default function ConceptProjectPage({ params }: { params: { slug: string } }) {
+export default function ProjectPage({ params }: { params: { slug: string } }) {
   const title = params.slug.split('-').map(w => w.toUpperCase()).join(' ');
+
+  // Dummy data. Will be replaced by Supabase fetch
+  const project = {
+    title: title,
+    client: "Client Name",
+    budget: "₹1,20,000",
+    timeline: "21st–23rd March 2026",
+    youtubeUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Demo
+    description: "Offered by Prime Minister's Office. Played in 145 embassies across the globe.",
+  };
 
   return (
     <div className="pt-32 pb-24 min-h-screen bg-brand-bg text-brand-ink">
       <div className="container mx-auto px-6 md:px-12">
-        <Link href="/work" className="text-sm font-bold uppercase tracking-widest hover:text-brand-orange transition-colors inline-block mb-12">
-          ← BACK TO LAB
+        <Link href="/work" className="text-sm font-bold uppercase tracking-widest hover:text-brand-red transition-colors inline-block mb-12">
+          ← BACK TO WORK
         </Link>
-        
-        <div className="mb-12 inline-block px-3 py-1 bg-brand-orange text-brand-bg text-xs font-bold uppercase tracking-widest">
-          FICTIONAL CONCEPT PROJECT
-        </div>
 
-        <h1 className="text-[15vw] font-display font-extrabold leading-[0.8] mb-12 break-words">
-          {title}
+        <h1 className="text-[clamp(4rem,8vw,12rem)] font-display font-extrabold leading-[0.85] mb-12 break-words uppercase">
+          {project.title}
         </h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-y-4 border-brand-ink py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-y-2 border-white/20 py-12">
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-2">Category</div>
-            <div className="font-display font-bold text-2xl uppercase">Fictional</div>
+            <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-2">Client</div>
+            <div className="font-display font-bold text-2xl uppercase">{project.client}</div>
           </div>
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-2">Industry</div>
-            <div className="font-display font-bold text-2xl uppercase">Exploration</div>
+            <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-2">Budget</div>
+            <div className="font-display font-bold text-2xl uppercase">{project.budget || "N/A"}</div>
           </div>
           <div className="col-span-2">
-            <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-2">Focus</div>
-            <div className="font-display font-bold text-2xl uppercase">Art Direction, Identity</div>
+            <div className="text-xs font-bold uppercase tracking-widest opacity-50 mb-2">Timeline</div>
+            <div className="font-display font-bold text-2xl uppercase">{project.timeline || "N/A"}</div>
           </div>
         </div>
       </div>
 
-      {/* Hero Experimental Image Area */}
-      <div className="w-full h-[80vh] bg-brand-ink flex items-center justify-center relative overflow-hidden mb-32 group" data-cursor="DRAG">
-        <div className="absolute inset-0 bg-brand-blue mix-blend-color opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-        <div className="text-[30vw] font-display font-extrabold text-white/5 whitespace-nowrap group-hover:scale-110 transition-transform duration-1000">
-          {title}
-        </div>
+      {/* Hero Video / Image Area */}
+      <div className="w-full relative bg-[#111] mb-32 flex items-center justify-center aspect-[16/9] md:aspect-[21/9]">
+        {project.youtubeUrl ? (
+          <iframe 
+            src={`${project.youtubeUrl}?autoplay=0&rel=0`} 
+            title="YouTube video player" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+            loading="lazy"
+            className="w-full h-full border-0 absolute inset-0"
+          ></iframe>
+        ) : (
+          <div className="text-white/20 font-display text-4xl uppercase tracking-widest">
+            MEDIA PLACEHOLDER
+          </div>
+        )}
       </div>
 
       <div className="container mx-auto px-6 md:px-12 max-w-6xl">
         <div className="grid md:grid-cols-12 gap-16 mb-32">
-          <div className="md:col-span-4 text-sm font-bold uppercase tracking-widest text-brand-orange">
-            The Premise
+          <div className="md:col-span-4 text-sm font-bold uppercase tracking-widest text-brand-red">
+            The Brief
           </div>
-          <div className="md:col-span-8 text-3xl md:text-5xl font-display font-bold leading-tight uppercase">
-            What if a brand could visually communicate speed without ever showing movement? This concept explores typography as physical tension.
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-12 gap-16 mb-32">
-          <div className="md:col-span-4 text-sm font-bold uppercase tracking-widest text-brand-blue">
-            Creative Direction
-          </div>
-          <div className="md:col-span-8 space-y-8 text-xl font-medium leading-relaxed max-w-2xl">
-            <p>We designed a brutalist typographic system that intentionally feels incomplete, forcing the viewer's brain to finish the shapes. It's an exercise in reduction.</p>
-            <p>The color palette is restricted to only pure CMYK values to represent a digital-first origin, intentionally creating harsh, uncomfortable contrast.</p>
+          <div className="md:col-span-8 text-2xl md:text-4xl font-display font-bold leading-tight uppercase text-balance">
+            {project.description}
           </div>
         </div>
       </div>
 
       {/* Footer CTA */}
-      <div className="bg-brand-ink text-brand-bg py-48">
+      <div className="bg-[#111] text-white py-48">
         <div className="container mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-[10vw] font-display font-extrabold leading-[0.8] mb-16 uppercase">
-            WANT REAL<br/><span className="text-brand-orange">RESULTS?</span>
+          <h2 className="text-[clamp(4rem,8vw,10rem)] font-display font-extrabold leading-[0.8] mb-16 uppercase">
+            START<br/><span className="text-brand-red">SOMETHING.</span>
           </h2>
           <Link 
             href="/contact" 
-            className="text-4xl font-sans font-bold uppercase tracking-widest border-b-4 border-brand-bg pb-2 hover:text-brand-blue hover:border-brand-blue transition-colors"
-            data-cursor="YES"
+            className="text-3xl md:text-5xl font-sans font-bold uppercase tracking-widest border-b-8 border-brand-red pb-2 hover:text-white transition-colors"
+            data-cursor="CONTACT"
           >
-            HIRE US FOR YOUR BRAND
+            WORK WITH CREATE
           </Link>
         </div>
       </div>

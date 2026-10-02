@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navigation() {
@@ -17,7 +18,10 @@ export default function Navigation() {
   const navLinks = [
     { name: "WORK", href: "/work" },
     { name: "SERVICES", href: "/services" },
-    { name: "ABOUT", href: "/about" },
+    { name: "STUDIO", href: "/studio" },
+    { name: "LABS", href: "/labs" },
+    { name: "SOCIAL", href: "/social" },
+    { name: "EVENTS", href: "/events" },
     { name: "INSIGHTS", href: "/insights" },
   ];
 
@@ -26,10 +30,13 @@ export default function Navigation() {
       <header className="fixed top-0 left-0 right-0 z-50 p-6 md:p-8 pointer-events-none flex justify-between items-start">
         <Link 
           href="/" 
-          className="text-3xl md:text-5xl font-display font-bold tracking-tighter pointer-events-auto mix-blend-difference text-white"
+          className="pointer-events-auto mix-blend-difference group flex items-baseline gap-1"
           data-cursor="HOME"
         >
-          CREATE
+          {/* We use text representing the brand identity until the user drops the actual logo.svg into public/ */}
+          <span className="text-3xl md:text-4xl font-display font-extrabold tracking-tighter text-white">
+            CREATE<span className="text-brand-red">.</span>
+          </span>
         </Link>
         
         <div className="flex flex-col items-end gap-4 pointer-events-auto">
@@ -44,7 +51,7 @@ export default function Navigation() {
             />
             <motion.div 
               animate={{ opacity: isOpen ? 0 : 1 }} 
-              className="w-6 h-1 bg-white transition-all group-hover:w-8"
+              className="w-6 h-1 bg-brand-red transition-all group-hover:w-8"
             />
             <motion.div 
               animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0, width: isOpen ? 32 : 16 }} 
@@ -62,7 +69,7 @@ export default function Navigation() {
       >
         <Link 
           href="/contact"
-          className="bg-brand-blue text-white px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-brand-ink transition-colors flex items-center justify-center shadow-2xl"
+          className="bg-brand-red text-white px-8 py-4 font-display font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors flex items-center justify-center shadow-2xl"
           data-cursor="LET'S TALK"
         >
           START A PROJECT
@@ -77,20 +84,20 @@ export default function Navigation() {
             animate={{ clipPath: "circle(150% at 100% 0%)" }}
             exit={{ clipPath: "circle(0% at 100% 0%)" }}
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-brand-ink text-brand-bg flex flex-col justify-center items-center"
+            className="fixed inset-0 z-40 bg-black text-white flex flex-col justify-center items-center"
           >
-            <nav className="flex flex-col space-y-4 md:space-y-8 text-center">
+            <nav className="flex flex-col space-y-4 md:space-y-6 text-center max-h-screen overflow-y-auto py-24">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.name}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -40 }}
-                  transition={{ delay: 0.1 * i, duration: 0.5, ease: "easeOut" }}
+                  transition={{ delay: 0.05 * i, duration: 0.5, ease: "easeOut" }}
                 >
                   <Link
                     href={link.href}
-                    className="text-6xl md:text-[8rem] font-display font-extrabold hover:text-brand-orange transition-colors leading-none"
+                    className="text-5xl md:text-[6rem] font-display font-extrabold hover:text-brand-red transition-colors leading-none"
                     onClick={() => setIsOpen(false)}
                     data-cursor="EXPLORE"
                   >
@@ -102,12 +109,12 @@ export default function Navigation() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -40 }}
-                transition={{ delay: 0.1 * navLinks.length, duration: 0.5, ease: "easeOut" }}
-                className="pt-8"
+                transition={{ delay: 0.05 * navLinks.length, duration: 0.5, ease: "easeOut" }}
+                className="pt-12"
               >
                 <Link
                   href="/contact"
-                  className="text-2xl md:text-4xl font-sans text-brand-blue uppercase tracking-widest font-bold underline underline-offset-8 decoration-2 hover:text-white transition-colors"
+                  className="text-2xl md:text-3xl font-sans text-brand-red uppercase tracking-widest font-bold underline underline-offset-8 decoration-2 hover:text-white transition-colors"
                   onClick={() => setIsOpen(false)}
                   data-cursor="HI!"
                 >

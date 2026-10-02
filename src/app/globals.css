@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  /* High contrast brutalist theme: Black, Yellow, Red */
-  --color-brand-bg: #050505; /* Pure black */
-  --color-brand-ink: #FFFFFF; /* Pure white for high contrast text */
-  --color-brand-orange: #FFE600; /* Cyber Yellow (keeping variable name) */
-  --color-brand-blue: #FF0033; /* Strong Red (keeping variable name) */
+  --color-brand-bg: #000000; /* Pure black */
+  --color-brand-ink: #FFFFFF; /* Pure white */
+  --color-brand-red: #B90000; /* Blood Red */
 
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
@@ -15,7 +13,7 @@
 }
 
 :root {
-  --background: #050505;
+  --background: #000000;
   --foreground: #FFFFFF;
 }
 
@@ -29,8 +27,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-brand-orange);
-  color: #000;
+  background: var(--color-brand-red);
+  color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
