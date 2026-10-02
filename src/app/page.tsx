@@ -15,7 +15,7 @@ export default function Home() {
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
-  const philosophy = ["CONNECT", "RESEARCH", "EXECUTE", "ASSEMBLE", "TRANSFORM", "ELEVATE"];
+
 
   const portfolio = [
     { 
@@ -122,8 +122,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Philosophy (Clean grid) */}
-      <section className="py-32 bg-[#050505] px-6 md:px-12">
+      {/* Powerful Statement */}
+      <section className="py-32 bg-brand-red text-white text-center px-6 md:px-12">
+        <div className="container mx-auto max-w-5xl">
+          <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight leading-tight uppercase">
+            We do NOT SELL content.<br/>
+            We CREATE. BRANDS that SELL.
+          </h2>
+        </div>
+      </section>
+
+      {/* Philosophy (Detailed grid) */}
+      <section className="py-32 bg-[#050505] px-6 md:px-12 border-t border-white/5">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-24">
             <h2 className="text-brand-red text-sm font-bold uppercase tracking-widest mb-4">Our Philosophy</h2>
@@ -132,18 +142,28 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-y-16 gap-x-8 text-center max-w-4xl mx-auto">
-            {philosophy.map((word, i) => (
+          <div className="grid md:grid-cols-2 gap-y-16 gap-x-16 max-w-5xl mx-auto">
+            {[
+              { letter: "C", word: "CONNECT", desc: "With the brand, audience & culture" },
+              { letter: "R", word: "RESEARCH", desc: "The market before touching the camera" },
+              { letter: "E", word: "EXECUTE", desc: "Production of content built for attention" },
+              { letter: "A", word: "AMPLIFY", desc: "Through culture, creators & campaigns" },
+              { letter: "T", word: "TRANSFORM", desc: "Businesses into brands" },
+              { letter: "E", word: "ELEVATE", desc: "Brands into experiences" },
+            ].map((item, i) => (
               <motion.div 
                 key={i} 
-                className="flex flex-col items-center justify-center"
+                className="flex items-start gap-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
               >
-                <div className="text-xs font-bold text-white/30 mb-2">0{i + 1}</div>
-                <div className="text-xl md:text-2xl font-display font-bold uppercase tracking-widest">{word}.</div>
+                <div className="text-5xl md:text-7xl font-display font-bold text-brand-red leading-none">{item.letter}</div>
+                <div>
+                  <div className="text-2xl font-display font-bold uppercase tracking-widest mb-2">{item.word}.</div>
+                  <div className="text-white/60 font-sans font-medium text-lg">{item.desc}</div>
+                </div>
               </motion.div>
             ))}
           </div>
