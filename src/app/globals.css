@@ -3,13 +3,25 @@
 @theme {
   --color-brand-bg: #000000;
   --color-brand-ink: #FFFFFF;
-  --color-brand-red: #D90429; /* A slightly more cinematic, premium red */
+  --color-brand-red: #D90429;
 
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
 
   --color-background: var(--color-brand-bg);
   --color-foreground: var(--color-brand-ink);
+
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-marquee2: marquee2 25s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+  @keyframes marquee2 {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+  }
 }
 
 :root {
@@ -32,11 +44,10 @@ body {
   color: #fff;
 }
 
-/* Premium Typography Baseline */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.02em; /* Less aggressive than brutalist */
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -48,7 +59,6 @@ p {
   text-wrap: balance;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -63,7 +73,6 @@ p {
   background: var(--color-brand-red);
 }
 
-/* Utilities for masking animations */
 .mask-text {
   overflow: hidden;
   display: inline-block;

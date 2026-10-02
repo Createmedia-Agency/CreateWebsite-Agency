@@ -170,6 +170,78 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Client Logos (Premium Marquee or Grid) */}
+      <section className="py-24 bg-brand-bg border-t border-white/5 overflow-hidden">
+        <div className="container mx-auto px-6 md:px-12 max-w-7xl mb-12 text-center">
+          <h2 className="text-brand-red text-sm font-bold uppercase tracking-widest mb-4">Created For</h2>
+        </div>
+        
+        {/* Simple elegant CSS scrolling marquee of text since we don't have the raw logo SVGs yet */}
+        <div className="relative flex overflow-x-hidden group">
+          <div className="py-8 animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-32 px-8">
+            {["Government of Meghalaya", "W.H Warehouse", "Sharda International School", "PWD Delhi", "No Label", "Sabrini", "P&G", "BRB", "Tipsy Tiger", "Troovy", "Wellbeing Nutrition", "Red Bull", "IIAC", "PW", "Protiviti", "AIESEC", "TrustERRA", "Korean Cultural Centre", "JhaJi"].map((client, i) => (
+              <span key={i} className="text-2xl md:text-4xl font-display font-bold text-white/20 hover:text-white transition-colors duration-300">
+                {client}
+              </span>
+            ))}
+          </div>
+          <div className="absolute top-0 py-8 animate-marquee2 whitespace-nowrap flex items-center gap-16 md:gap-32 px-8">
+            {["Government of Meghalaya", "W.H Warehouse", "Sharda International School", "PWD Delhi", "No Label", "Sabrini", "P&G", "BRB", "Tipsy Tiger", "Troovy", "Wellbeing Nutrition", "Red Bull", "IIAC", "PW", "Protiviti", "AIESEC", "TrustERRA", "Korean Cultural Centre", "JhaJi"].map((client, i) => (
+              <span key={i} className="text-2xl md:text-4xl font-display font-bold text-white/20 hover:text-white transition-colors duration-300">
+                {client}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-32 bg-[#050505] px-6 md:px-12 border-t border-white/5">
+        <div className="container mx-auto max-w-7xl">
+          <div className="mb-24 text-center">
+            <h2 className="text-brand-red text-sm font-bold uppercase tracking-widest mb-4">Created By</h2>
+            <h3 className="text-4xl md:text-5xl font-display font-bold tracking-tight">The Leadership.</h3>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-16">
+            {[
+              {
+                name: "Akash",
+                bio: "A graduate of Sri Venkateswara College, University of Delhi and former President of Film Club Effulgence, Akash built his creative foundation through filmmaking, production, and visual storytelling. His journey from campus productions to collaborating with emerging and established brands shaped his belief that great ideas deserve exceptional execution."
+              },
+              {
+                name: "Nimit",
+                bio: "An alumnus of IIM Lucknow and former Vice President of Film Club Effulgence, Nimit brings together leadership, strategy, and execution. His experience spans student leadership, consumer brands, and high-growth projects, giving him a unique perspective on transforming creative ideas into measurable business outcomes."
+              },
+              {
+                name: "Shehul",
+                bio: "A graduate of Sri Venkateswara College, University of Delhi, Shehul began his leadership journey as the Cultural Secretary of Effulgence 2023. From managing large-scale cultural initiatives to working with international organizations, government bodies, and purpose-driven brands, he developed a strategic understanding of how stories shape perception and impact."
+              }
+            ].map((member, i) => (
+              <motion.div 
+                key={i}
+                className="group"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+              >
+                <div className="aspect-[3/4] bg-[#111] mb-8 relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                  <div className="absolute inset-0 flex items-center justify-center text-white/10 font-display uppercase tracking-widest text-sm">
+                    Photo Placeholder
+                  </div>
+                </div>
+                <h4 className="text-3xl font-display font-bold mb-4">{member.name}</h4>
+                <div className="w-12 h-1 bg-brand-red mb-6"></div>
+                <p className="text-white/60 font-sans font-medium leading-relaxed text-sm">
+                  {member.bio}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Divisions */}
       <section className="py-32 bg-brand-bg px-6 md:px-12 border-t border-white/5">
         <div className="container mx-auto max-w-7xl">
