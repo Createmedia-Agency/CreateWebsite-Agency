@@ -8,12 +8,12 @@ export default function Footer() {
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
           <div className="md:col-span-5">
-            <Link href="/" className="block relative w-48 h-16 mb-8 hover:opacity-80 transition-opacity">
+            <Link href="/" className="block relative w-48 h-32 mb-8 hover:opacity-80 transition-opacity">
               <Image 
                 src="/logo.png" 
                 alt="CREATE. Logo" 
                 fill 
-                className="object-contain object-left invert"
+                className="object-contain object-left"
               />
             </Link>
             <p className="text-xl font-sans font-medium opacity-80 max-w-sm leading-relaxed text-balance">

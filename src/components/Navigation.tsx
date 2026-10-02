@@ -30,14 +30,14 @@ export default function Navigation() {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-4 bg-black/80 backdrop-blur-xl' : 'py-8 md:py-12'} px-6 md:px-12 pointer-events-none flex justify-between items-center`}>
         <Link 
           href="/" 
-          className="pointer-events-auto relative w-32 md:w-40 h-10 mix-blend-difference opacity-90 hover:opacity-100 transition-opacity"
+          className="pointer-events-auto relative w-32 md:w-48 h-16 md:h-20 mix-blend-difference opacity-90 hover:opacity-100 transition-opacity"
           data-cursor="HOME"
         >
           <Image 
             src="/logo.png" 
             alt="CREATE. Logo" 
             fill 
-            className="object-contain object-left invert"
+            className="object-contain object-left"
             priority
           />
         </Link>
