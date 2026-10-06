@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -170,7 +171,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             className="text-4xl md:text-6xl font-display font-bold tracking-tight hover:text-brand-red transition-colors inline-block"
             data-cursor="CONTACT"
           >
-            Start a Conversation →
+            Start a Conversation <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
           </Link>
         </div>
       </div>

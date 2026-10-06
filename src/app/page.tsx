@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/ArrowIcon";
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -199,7 +200,7 @@ export default function Home() {
               Some of Our Work.
             </h2>
             <Link href="/work" className="text-sm font-medium tracking-widest uppercase hover:text-brand-red transition-colors">
-              View All Work →
+              View All Work <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
 
@@ -310,7 +311,7 @@ export default function Home() {
             href="/about"
             className="inline-block text-sm font-bold uppercase tracking-widest hover:text-brand-red transition-colors"
           >
-            Meet The Leadership →
+            Meet The Leadership <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
           </Link>
         </div>
       </section>
@@ -347,24 +348,24 @@ export default function Home() {
               Insights & Thinking.
             </h2>
             <Link href="/insights" className="text-sm font-medium tracking-widest uppercase hover:text-brand-red transition-colors">
-              Read More →
+              Read More <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
              <div className="border border-white/10 p-8 hover:border-brand-red transition-colors">
                 <span className="text-brand-red text-xs font-bold uppercase tracking-widest mb-4 block">Production</span>
                 <h3 className="text-2xl font-display font-bold mb-4">Why execution is just as important as the idea.</h3>
-                <Link href="/insights" className="text-sm font-bold uppercase hover:text-brand-red transition-colors mt-8 inline-block">Read →</Link>
+                <Link href="/insights" className="text-sm font-bold uppercase hover:text-brand-red transition-colors mt-8 inline-block">Read <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" /></Link>
              </div>
              <div className="border border-white/10 p-8 hover:border-brand-red transition-colors">
                 <span className="text-brand-red text-xs font-bold uppercase tracking-widest mb-4 block">Strategy</span>
                 <h3 className="text-2xl font-display font-bold mb-4">Researching the context before developing the creative.</h3>
-                <Link href="/insights" className="text-sm font-bold uppercase hover:text-brand-red transition-colors mt-8 inline-block">Read →</Link>
+                <Link href="/insights" className="text-sm font-bold uppercase hover:text-brand-red transition-colors mt-8 inline-block">Read <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" /></Link>
              </div>
              <div className="border border-white/10 p-8 hover:border-brand-red transition-colors">
                 <span className="text-brand-red text-xs font-bold uppercase tracking-widest mb-4 block">Storytelling</span>
                 <h3 className="text-2xl font-display font-bold mb-4">How visual stories shape audience perception.</h3>
-                <Link href="/insights" className="text-sm font-bold uppercase hover:text-brand-red transition-colors mt-8 inline-block">Read →</Link>
+                <Link href="/insights" className="text-sm font-bold uppercase hover:text-brand-red transition-colors mt-8 inline-block">Read <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" /></Link>
              </div>
           </div>
         </div>

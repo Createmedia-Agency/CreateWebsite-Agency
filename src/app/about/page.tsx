@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { Metadata } from "next";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
@@ -110,7 +111,7 @@ export default function AboutPage() {
             href="/why-choose-us"
             className="inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-brand-red transition-colors"
           >
-            Why Choose CREATE <span className="text-lg">â†’</span>
+            Why Choose CREATE <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
           </Link>
         </div>
 

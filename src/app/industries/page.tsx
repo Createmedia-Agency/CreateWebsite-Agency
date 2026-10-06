@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -37,7 +38,7 @@ export default function IndustriesPage() {
           {industries.map((industry, i) => (
             <div key={i} className="p-10 bg-[#050505] border border-white/5 hover:border-brand-red transition-colors duration-300 flex items-center justify-between group">
               <h2 className="text-2xl font-display font-bold group-hover:text-brand-red transition-colors">{industry}</h2>
-              <span className="text-white/20 group-hover:text-brand-red transition-colors">→</span>
+              <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
             </div>
           ))}
         </div>

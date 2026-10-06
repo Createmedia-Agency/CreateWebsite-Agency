@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/ArrowIcon";
 ﻿import { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
@@ -132,7 +133,7 @@ export default function ServicesPage() {
               </div>
               
               <div className="mt-8 md:mt-0 font-bold uppercase tracking-widest text-sm text-white/30 group-hover:text-brand-red transition-colors duration-500 flex items-center gap-4 shrink-0">
-                Explore <span className="group-hover:translate-x-4 transition-transform duration-500">â†’</span>
+                Explore <ArrowIcon className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
               </div>
             </Link>
           ))}
