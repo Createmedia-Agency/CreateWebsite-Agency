@@ -8,6 +8,7 @@ export default function ContactPage() {
   
   // Form State
   const [status, setStatus] = useState<"IDLE" | "SUBMITTING" | "SUCCESS" | "ERROR">("IDLE");
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "", company: "", email: "", phone: "", website: "",
     projectType: "", budget: "", message: "", _gotcha: ""
@@ -35,7 +36,10 @@ export default function ContactPage() {
         body: JSON.stringify(formData)
       });
 
-      if (!response.ok) throw new Error("Submission failed");
+      if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.error || "Submission failed");
+        }
       
       setStatus("SUCCESS");
     } catch (error) {
@@ -123,7 +127,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 {status === "ERROR" && (
                   <div className="p-4 bg-brand-red/10 border border-brand-red/50 text-brand-red text-sm text-center">
-                    We encountered an issue submitting your request. Please email us directly at createforbrands@gmail.com.
+                    {errorMessage || "We encountered an issue submitting your request. Please email us directly at createforbrands@gmail.com."}
                   </div>
                 )}
                 

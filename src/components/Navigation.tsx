@@ -1,11 +1,13 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -15,34 +17,12 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Work", href: "/work" },
-    { name: "About", href: "/about" },
-    { name: "Insights", href: "/insights" },
-  ];
-
-  const serviceLinks = [
-    { name: "Brand & Visual Design", href: "/services/brand-visual-design" },
-    { name: "Branded Content", href: "/services/branded-content" },
-    { name: "Campaign Production", href: "/services/campaign-production" },
-    { name: "Commercial Production", href: "/services/commercial-production" },
-    { name: "Content Marketing", href: "/services/content-marketing" },
-    { name: "Creative Direction", href: "/services/creative-direction" },
-    { name: "Performance Marketing", href: "/services/performance-marketing" },
-    { name: "Post-Production", href: "/services/post-production" },
-    { name: "Social Media Marketing", href: "/services/social-media-marketing" },
-    { name: "Visual Storytelling", href: "/services/visual-storytelling" },
-    { name: "Website Development", href: "/services/website-development" },
-  ];
+  const navLinks = [{ name: "Work", href: "/work" }, { name: "Services", href: "/services" }, { name: "About", href: "/about" }, { name: "Insights", href: "/insights" }];
 
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'py-4 bg-black/80 backdrop-blur-xl' : 'py-8 md:py-12'} px-6 md:px-12 pointer-events-none flex justify-between items-center`}>
-        <Link 
-          href="/" 
-          className="pointer-events-auto relative w-32 md:w-48 h-16 md:h-20 opacity-90 hover:opacity-100 transition-opacity"
-          data-cursor="HOME"
-        >
+        <Link href="/" onClick={(e) => { if (pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } setIsOpen(false); }} className="pointer-events-auto relative w-32 md:w-48 h-16 md:h-20 opacity-90 hover:opacity-100 transition-opacity" data-cursor="HOME">
           {/* Removed mix-blend-difference to fix the unwanted visible box/container around the logo */}
           <Image 
             src="/create-logo-transparent.png" 
@@ -132,30 +112,27 @@ export default function Navigation() {
                 className="flex flex-col gap-10 md:gap-12 md:border-l md:border-white/10 md:pl-16 py-4"
               >
                 <div>
-                  <h4 className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">Start Something</h4>
-                  <Link
-                    href="/contact"
-                    className="text-[clamp(1.5rem,3vw,2rem)] font-display font-bold text-white hover:text-brand-red transition-colors tracking-tight flex items-center gap-4 group"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Let's Talk <span className="group-hover:translate-x-2 transition-transform">→</span>
-                  </Link>
-                </div>
+                    <h4 className="text-base md:text-lg font-bold uppercase tracking-widest text-brand-red mb-4">START SOMETHING</h4>
+                    <Link
+                      href="/contact"
+                      className="text-4xl md:text-5xl font-display font-bold text-white hover:text-brand-red transition-colors tracking-tight flex items-center gap-4 group"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Let's Talk 
+                      <svg 
+                        className="w-8 h-8 md:w-10 md:h-10 group-hover:translate-x-2 transition-transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Link>
+                  </div>
                 
                 <div>
-                  <Link href="/services" className="text-sm font-bold uppercase tracking-widest text-brand-red hover:text-white transition-colors mb-4 block" onClick={() => setIsOpen(false)}>Services</Link>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {serviceLinks.map((link) => (
-                      <Link 
-                        key={link.name} 
-                        href={link.href}
-                        className="text-[clamp(0.85rem,1.25vw,1rem)] font-sans font-medium text-white/70 hover:text-white hover:translate-x-1 transition-all"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">Social</h4><div className="flex flex-col gap-3"><a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">Instagram</a><a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">LinkedIn</a><a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">Vimeo</a></div>
                 </div>
               </motion.div>
               
@@ -166,3 +143,6 @@ export default function Navigation() {
     </>
   );
 }
+
+
+

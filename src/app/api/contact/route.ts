@@ -91,6 +91,13 @@ export async function POST(req: Request) {
       );
     }
 
+    
+    // 1. BACKEND CONFIGURATION CHECK
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.RESEND_API_KEY) {
+      console.error("[CONTACT_BACKEND_NOT_CONFIGURED] Missing required environment variables.");
+      return NextResponse.json({ error: "Backend services are not properly configured to process requests. Please email us directly at createforbrands@gmail.com." }, { status: 503 });
+    }
+
     // Parse body
     let body: Record<string, unknown>;
     try {

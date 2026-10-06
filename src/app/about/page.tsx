@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About CREATE | Creative Production Studio",
@@ -57,14 +58,17 @@ export default function AboutPage() {
             {[
               {
                 name: "Akash",
+                image: "/images/team/akash.png",
                 bio: "A graduate of Sri Venkateswara College, University of Delhi and former President of Film Club Effulgence, Akash built his creative foundation through filmmaking, production, and visual storytelling. His journey from campus productions to collaborating with emerging and established brands shaped his belief that great ideas deserve exceptional execution."
               },
               {
                 name: "Nimit",
+                image: "/images/team/nimit.jpg",
                 bio: "An alumnus of IIM Lucknow and former Vice President of Film Club Effulgence, Nimit brings together leadership, strategy, and execution. His experience spans student leadership, consumer brands, and high-growth projects, giving him a unique perspective on transforming creative ideas into measurable business outcomes."
               },
               {
                 name: "Shehul",
+                image: "/images/team/shehul.png",
                 bio: "A graduate of Sri Venkateswara College, University of Delhi, Shehul began his leadership journey as the Cultural Secretary of Effulgence 2023. From managing large-scale cultural initiatives to working with international organizations, government bodies, and purpose-driven brands, he developed a strategic understanding of how stories shape perception and impact."
               }
             ].map((member, i) => (
@@ -77,10 +81,13 @@ export default function AboutPage() {
                 transition={{ delay: i * 0.1, duration: 0.6 }}
               >
                 <div className="aspect-[3/4] bg-[#111] mb-8 relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 border border-white/10 group-hover:border-brand-red">
-                  <div className="absolute inset-0 flex items-center justify-center text-white/10 font-display uppercase tracking-widest text-sm">
-                    {/* The prompt mentioned real supplied photographs. Without the actual file paths, we retain the elegant placeholder styling, but assuming they upload them to public/team/ later, this layout will support it beautifully. */}
-                    Photo of {member.name}
-                  </div>
+                  {member.image ? (
+                    <Image src={member.image} alt={member.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-white/10 font-display uppercase tracking-widest text-sm">
+                      Photo of {member.name}
+                    </div>
+                  )}
                 </div>
                 <h4 className="text-3xl font-display font-bold mb-4">{member.name}</h4>
                 <div className="w-12 h-1 bg-brand-red mb-6"></div>
@@ -103,7 +110,7 @@ export default function AboutPage() {
             href="/why-choose-us"
             className="inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-brand-red transition-colors"
           >
-            Why Choose CREATE <span className="text-lg">→</span>
+            Why Choose CREATE <span className="text-lg">â†’</span>
           </Link>
         </div>
 
@@ -122,3 +129,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
+

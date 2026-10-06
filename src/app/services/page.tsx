@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const services = [
   {
     name: "Brand & Visual Design",
-    slug: "brand-visual-design",
+    slug: "brand-and-visual-design",
     desc: "Build a stronger visual identity with CREATE. We create brand visuals, campaign design, key visuals, and creative assets.",
     accentColor: "#3B82F6"
   },
@@ -132,7 +132,7 @@ export default function ServicesPage() {
               </div>
               
               <div className="mt-8 md:mt-0 font-bold uppercase tracking-widest text-sm text-white/30 group-hover:text-brand-red transition-colors duration-500 flex items-center gap-4 shrink-0">
-                Explore <span className="group-hover:translate-x-4 transition-transform duration-500">→</span>
+                Explore <span className="group-hover:translate-x-4 transition-transform duration-500">â†’</span>
               </div>
             </Link>
           ))}
@@ -152,3 +152,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+

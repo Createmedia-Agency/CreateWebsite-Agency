@@ -5,7 +5,7 @@ import Script from "next/script";
 import Image from "next/image";
 
 const servicesData = {
-  "brand-visual-design": {
+  "brand-and-visual-design": {
     name: "Brand & Visual Design",
     title: "Visual Design That Supports the Story",
     seoTitle: "Creative Design & Brand Visuals",
@@ -133,7 +133,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = servicesData[params.slug as keyof typeof servicesData];
+  const service = servicesData[resolvedParams.slug as keyof typeof servicesData];
   if (!service) return { title: "Service Not Found" };
 
   return {
@@ -141,7 +141,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: service.description,
     keywords: service.keywords.join(", "),
     alternates: {
-      canonical: `https://createforbrands.com/services/${params.slug}`
+      canonical: `https://createforbrands.com/services/${resolvedParams.slug}`
     }
   };
 }
@@ -152,8 +152,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ServicePage({ params }: Props) {
-  const service = servicesData[params.slug as keyof typeof servicesData];
+export default async function ServicePage({ params }: Props) {
+  const resolvedParams = await params;
+  const service = servicesData[resolvedParams.slug as keyof typeof servicesData];
   
   if (!service) {
     notFound();
@@ -170,14 +171,14 @@ export default function ServicePage({ params }: Props) {
       "url": "https://createforbrands.com"
     },
     "description": service.description,
-    "image": `https://createforbrands.com/images/services/${params.slug}.webp`
+    "image": `https://createforbrands.com/images/services/${resolvedParams.slug}.webp`
   };
 
   return (
     <div className="pt-32 pb-24 min-h-screen bg-brand-bg text-brand-ink transition-colors duration-1000">
       {/* Schema */}
       <Script
-        id={`schema-${params.slug}`}
+        id={`schema-${resolvedParams.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
@@ -199,7 +200,7 @@ export default function ServicePage({ params }: Props) {
       <section className="px-6 md:px-12 mb-32 container mx-auto max-w-7xl">
         <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#111]">
           <Image 
-            src={`/images/services/${params.slug}.webp`}
+            src={`/images/services/${resolvedParams.slug}.webp`}
             alt={`${service.name} - CREATE Studio`}
             fill
             sizes="(max-width: 768px) 100vw, 1200px"

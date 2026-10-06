@@ -4,12 +4,27 @@ import { notFound } from "next/navigation";
 
 // Define the exact portfolio data locally since we don't have Supabase hooked up yet
 const portfolioDb = {
+  "shiv-immersive": {
+    title: "Shiv Immersive Reels",
+    client: "Shiv Immersive",
+    budget: null,
+    timeline: null,
+    youtubeUrl: null,
+    reels: [
+      "https://www.instagram.com/reel/DdEaYGZJtdM/embed",
+      "https://www.instagram.com/reel/DdHNNxMhDTi/embed",
+      "https://www.instagram.com/reel/DdEfxbtgt2B/embed",
+      "https://www.instagram.com/reel/DdMcOrNOzeM/embed"
+    ],
+    brief: "A series of immersive Instagram reels produced for Shiv Immersive.",
+    services: ["Production", "Social Media", "Post-Production"]
+  },
   "balidaan-diwas": {
     title: "Bhagat Singh Memorial Day",
     client: "PWD Delhi",
-    budget: "₹1,20,000",
+    budget: "₹11,20,000",
     timeline: "21st–23rd March 2026",
-    youtubeUrl: null, 
+    youtubeUrl: "https://www.youtube.com/embed/4kR-PMhCSc8", 
     brief: "Museum Inauguration Video for Bhagat Singh Memorial Day.",
     services: ["Concept", "Production", "Post-Production"]
   },
@@ -17,10 +32,10 @@ const portfolioDb = {
     title: "IIAC Promotional Video",
     client: "India International Arbitration Centre",
     budget: "₹2,45,000",
-    timeline: "15 days",
+    timeline: "15 Days",
     youtubeUrl: null, 
-    // E-E-A-T Rule: Removed unverified claim regarding PMO and 145 embassies.
-    brief: "Promotional video highlighting the India International Arbitration Centre.",
+    googleDriveId: "1h5IsPFCKi4eMrLAhvO8kskZGv3Lr0XTL",
+    brief: "Offered By Prime Minister's Office. Promotional Video played in 145 Embassies across the globe.",
     services: ["Production", "Editing", "Visual Storytelling"]
   },
   "laut-aaye": {
@@ -28,7 +43,7 @@ const portfolioDb = {
     client: "Naash",
     budget: null,
     timeline: null,
-    youtubeUrl: null,
+    youtubeUrl: "https://www.youtube.com/embed/a4S9Q-Tchs4",
     brief: "Lyrical video for the release of Laut Aaye Budhu.",
     services: ["Motion Design", "Post-Production", "Creative Direction"]
   },
@@ -44,7 +59,8 @@ const portfolioDb = {
 };
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const project = portfolioDb[params.slug as keyof typeof portfolioDb];
+  const resolvedParams = await params;
+  const project = portfolioDb[resolvedParams.slug as keyof typeof portfolioDb];
   if (!project) return { title: "Work Not Found | CREATE" };
   
   return {
@@ -53,8 +69,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = portfolioDb[params.slug as keyof typeof portfolioDb];
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const resolvedParams = await params;
+  const project = portfolioDb[resolvedParams.slug as keyof typeof portfolioDb];
   
   if (!project) {
     notFound();
@@ -62,59 +79,71 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="pt-32 pb-24 min-h-screen bg-brand-bg text-brand-ink">
-      
-      {/* Hero Header */}
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl mb-16">
-        <Link href="/work" className="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-brand-red transition-colors inline-block mb-12">
-          ← Back to Portfolio
-        </Link>
+    <div className="container mx-auto px-6 md:px-12 max-w-7xl mb-16 text-center">
+      <div className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">{project.category}</div>
+      <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-4 text-balance">
+        {project.title}
+      </h1>
+      <div className="text-xl text-white/60 font-medium uppercase tracking-widest">{project.client}</div>
+    </div>
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-8 max-w-5xl leading-tight text-balance">
-          {project.title}
-        </h1>
+    {/* Cinematic Video Player or Reels */}
+    {(project as any).projectType === "REEL_COLLECTION" ? (
+      <div className="container mx-auto px-6 md:px-12 mb-32 max-w-5xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16">
+          {(project as any).reels.map((reel: any, i: number) => (
+            <div key={i} className="aspect-[9/16] w-full relative group overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+              <img src={reel.thumbnail} alt={reel.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500"></div>
+              
+              {/* Premium Play Button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 border border-white/30 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red text-white transition-all duration-300 shadow-xl">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" className="ml-1"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-12">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Client</div>
-            <div className="text-lg font-medium">{project.client}</div>
-          </div>
-          {project.timeline && (
-            <div>
-              <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Timeline</div>
-              <div className="text-lg font-medium">{project.timeline}</div>
+              {/* Lightbox / Video Modal trigger overlay */}
+              <a href={reel.url} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10">
+                <span className="sr-only">Play Reel</span>
+              </a>
             </div>
-          )}
-          {project.budget && (
-            <div>
-              <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Budget Scope</div>
-              <div className="text-lg font-medium">{project.budget}</div>
-            </div>
-          )}
-          <div className={(!project.timeline || !project.budget) ? "col-span-2" : ""}>
-            <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Services</div>
-            <div className="text-lg font-medium">{project.services.join(", ")}</div>
-          </div>
+          ))}
         </div>
       </div>
-
-      {/* Cinematic Video Player */}
-      <div className="w-full relative bg-[#050505] mb-32 flex items-center justify-center aspect-[16/9] md:aspect-[21/9] border-y border-white/5">
-        {project.youtubeUrl ? (
+    ) : (project as any).googleDriveId ? (
+        <div className="w-full relative bg-[#050505] mb-32 flex items-center justify-center aspect-[16/9] md:aspect-[21/9] border-y border-white/5 overflow-hidden">
           <iframe 
-            src={`${project.youtubeUrl}?autoplay=0&rel=0`} 
+            src={`https://drive.google.com/file/d/${(project as any).googleDriveId}/preview`} 
             title={`${project.title} Video Player`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allow="autoplay" 
             allowFullScreen
             loading="lazy"
             className="w-full h-full border-0 absolute inset-0"
           ></iframe>
-        ) : (
-          <div className="text-white/20 font-sans text-lg uppercase tracking-widest flex flex-col items-center gap-4">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="opacity-50"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
-            Media Placeholder
-          </div>
-        )}
-      </div>
+        </div>
+      ) : project.youtubeUrl ? (
+        <div className="w-full relative bg-[#050505] mb-32 flex items-center justify-center aspect-[16/9] md:aspect-[21/9] border-y border-white/5 overflow-hidden">
+          {(() => {
+            const match = project.youtubeUrl.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+            const ytId = (match && match[2].length === 11) ? match[2] : null;
+            return ytId ? (
+              <iframe 
+                src={`https://www.youtube.com/embed/${ytId}?autoplay=0&rel=0`} 
+                title={`${project.title} Video Player`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                loading="lazy"
+                className="w-full h-full border-0 absolute inset-0"
+              ></iframe>
+            ) : null;
+          })()}
+        </div>
+      ) : (project as any).image ? (
+        <div className="w-full relative bg-[#050505] mb-32 flex items-center justify-center aspect-[16/9] md:aspect-[21/9] border-y border-white/5 overflow-hidden">
+          <img src={(project as any).image} alt={project.title} className="w-full h-full object-cover" />
+        </div>
+      ) : null}
 
       {/* Case Study Sections */}
       <div className="container mx-auto px-6 md:px-12 max-w-5xl mb-48 flex flex-col gap-24">

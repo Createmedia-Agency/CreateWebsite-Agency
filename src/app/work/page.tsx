@@ -1,45 +1,60 @@
-import { Metadata } from "next";
-import Link from "next/link";
+"use client";
+import { useState } from "react";
+import { VideoModal } from "@/components/VideoModal";
+﻿import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Creative Production Portfolio | Commercials, Campaigns & Branded Content",
-  description: "Explore CREATE's portfolio of commercials, branded content, campaigns, films, and visual storytelling projects.",
-};
 
 const portfolio = [
   {
     title: "Bhagat Singh Memorial Day",
     slug: "balidaan-diwas",
     client: "PWD Delhi",
-    category: "Commercials", // Museum Inauguration Video maps to Commercials/Brand Film
+    category: "Museum Inauguration Video",
+    youtubeUrl: "https://www.youtube.com/watch?v=4kR-PMhCSc8",
     aspectRatio: "aspect-[21/9]",
   },
   {
     title: "IIAC Promotional Video",
     slug: "iiac-promo",
     client: "India International Arbitration Centre",
-    category: "Campaigns",
+    category: "Promotional Video",
+    googleDriveId: "1h5IsPFCKi4eMrLAhvO8kskZGv3Lr0XTL",
+    image: "/images/services/commercial-production.webp",
     aspectRatio: "aspect-[16/9]",
   },
   {
     title: "Laut Aaye Budhu",
     slug: "laut-aaye",
     client: "Naash",
-    category: "Films",
+    category: "Lyrical Video",
+    youtubeUrl: "https://youtu.be/a4S9Q-Tchs4?si=HV1OzDyV0M9cy3NE",
     aspectRatio: "aspect-[16/9]",
   },
   {
-    title: "An Effulgence Production",
-    slug: "effulgence",
-    client: "Effulgence",
-    category: "Branded Content",
-    aspectRatio: "aspect-[16/9]",
+    title: "Shiv Immersive Reels",
+    slug: "shiv-immersive",
+    client: "Shiv Immersive",
+    category: "Reels / Social Video",
+    image: "/images/services/social-media-marketing.webp",
+    aspectRatio: "aspect-[21/9]",
   }
 ];
 
 const filters = ["All", "Commercials", "Branded Content", "Campaigns", "Films", "Social", "Design"];
 
 export default function WorkPage() {
+  const [activeVideo, setActiveVideo] = useState<{type: 'youtube' | 'drive' | 'url', idOrUrl: string} | null>(null);
+
+  const openVideo = (project: any) => {
+    if (project.youtubeUrl) {
+      const match = project.youtubeUrl.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+      if (match && match[2].length === 11) {
+        setActiveVideo({ type: 'youtube', idOrUrl: match[2] });
+      }
+    } else if (project.googleDriveId) {
+      setActiveVideo({ type: 'drive', idOrUrl: project.googleDriveId });
+    }
+  };
   return (
     <div className="pt-32 pb-24 px-6 md:px-12 min-h-screen bg-brand-bg text-brand-ink">
       <div className="container mx-auto max-w-7xl">
@@ -70,10 +85,35 @@ export default function WorkPage() {
           {portfolio.map((project, i) => (
             <div key={project.slug} className={`group ${i === 0 ? "md:col-span-2" : ""}`}>
               <Link href={`/work/${project.slug}`} className="block mb-8 relative overflow-hidden bg-[#111] rounded-sm">
-                <div className={`w-full ${i === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'} relative overflow-hidden`}>
-                  <div className="absolute inset-0 flex items-center justify-center text-white/20 font-display text-2xl uppercase tracking-widest group-hover:scale-105 transition-transform duration-1000 ease-out">
-                    MEDIA PLACEHOLDER
-                  </div>
+                <div className={`w-full ${i === 0 ? 'aspect-[21/9]' : 'aspect-[4/3]'} relative overflow-hidden bg-[#111]`}>
+                  {(() => {
+                    let thumbUrl = (project as any).image;
+                    let showPlay = true;
+
+                    if ((project as any).youtubeUrl) {
+                      const match = (project as any).youtubeUrl.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+                      if (match && match[2].length === 11) {
+                        thumbUrl = `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
+                      }
+                    } else if ((project as any).googleDriveId) {
+                      thumbUrl = `https://drive.google.com/thumbnail?id=${(project as any).googleDriveId}&sz=w1280`;
+                    }
+
+                    if (!thumbUrl) return null;
+
+                    return (
+                      <>
+                        <img src={thumbUrl} alt={project.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 scale-100 group-hover:scale-105" />
+                        {showPlay && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-16 h-16 border border-white/30 backdrop-blur-sm text-white rounded-full flex items-center justify-center pl-1 group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300 shadow-xl">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500"></div>
                 </div>
               </Link>
@@ -96,3 +136,4 @@ export default function WorkPage() {
     </div>
   );
 }
+

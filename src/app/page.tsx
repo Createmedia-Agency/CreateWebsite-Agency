@@ -3,8 +3,22 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
+import { VideoModal } from "@/components/VideoModal";
 
 export default function Home() {
+  const [activeVideo, setActiveVideo] = useState<{type: 'youtube' | 'drive' | 'url', idOrUrl: string} | null>(null);
+
+  const openVideo = (project: any) => {
+    if (project.youtubeUrl) {
+      const match = project.youtubeUrl.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+      if (match && match[2].length === 11) {
+        setActiveVideo({ type: 'youtube', idOrUrl: match[2] });
+      }
+    } else if (project.googleDriveId) {
+      setActiveVideo({ type: 'drive', idOrUrl: project.googleDriveId });
+    }
+  };
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -17,32 +31,47 @@ export default function Home() {
   const portfolio = [
     { 
       id: "01", 
-      name: "BALIDAAN DIWAS FINAL", 
-      client: "Naash",
-      category: "Memorial Day Video",
-      image: "/work/balidaan.jpg",
+      name: "Bhagat Singh Memorial Day", 
+      client: "PWD Delhi",
+      category: "Museum Inauguration Video",
+      youtubeUrl: "https://www.youtube.com/watch?v=4kR-PMhCSc8",
+      image: "",
       slug: "balidaan-diwas"
     },
     { 
       id: "02", 
-      name: "IIAC PROMOTIONAL VIDEO", 
+      name: "IIAC Promotional Video", 
       client: "India International Arbitration Centre",
       category: "Promotional Video",
-      image: "/work/iiac.jpg",
+      youtubeUrl: "",
+      googleDriveId: "1h5IsPFCKi4eMrLAhvO8kskZGv3Lr0XTL",
+      image: "/images/services/commercial-production.webp",
       slug: "iiac-promo"
     },
     { 
       id: "03", 
-      name: "LAUT AAYE BUDHU", 
+      name: "Laut Aaye Budhu", 
       client: "Naash",
       category: "Lyrical Video",
-      image: "/work/laut.jpg",
+      youtubeUrl: "https://youtu.be/a4S9Q-Tchs4?si=HV1OzDyV0M9cy3NE",
+      image: "",
       slug: "laut-aaye"
     },
+    { 
+      id: "04", 
+      name: "Shiv Immersive Reels", 
+      client: "Shiv Immersive",
+      category: "Reels / Social Video",
+      youtubeUrl: "",
+      image: "/images/services/social-media-marketing.webp",
+      slug: "shiv-immersive"
+    }
   ];
 
   return (
-    <div ref={containerRef} className="relative bg-brand-bg text-brand-ink selection:bg-brand-red">
+    <>
+      <VideoModal isOpen={!!activeVideo} onClose={() => setActiveVideo(null)} video={activeVideo} />
+      <div ref={containerRef} className="relative bg-brand-bg text-brand-ink selection:bg-brand-red">
       
       {/* 1. Hero & 2. CREATE Positioning */}
       <section className="min-h-screen pt-32 pb-24 px-6 md:px-12 flex flex-col justify-center relative overflow-hidden">
@@ -176,41 +205,56 @@ export default function Home() {
 
           <div className="flex flex-col gap-32">
             {portfolio.map((project, index) => (
-              <motion.div 
-                key={project.id}
-                className="group relative"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-              >
-                <Link href={`/work/${project.slug}`} className="block">
+                <motion.div 
+                  key={project.id}
+                  className="group relative cursor-pointer"
+                  onClick={() => openVideo(project)}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8 }}
+                >
                   <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#111] overflow-hidden mb-8 relative border border-white/10 group-hover:border-brand-red transition-colors duration-500">
-                    <div className="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 mix-blend-overlay"></div>
-                    <div className="absolute inset-0 flex items-center justify-center text-white/10 font-display uppercase tracking-widest">
-                      {/* Placeholder for video/image */}
-                      Media Container
-                    </div>
+                    {(() => {
+                      let thumbUrl = (project as any).image;
+                      if ((project as any).youtubeUrl) {
+                        const match = (project as any).youtubeUrl.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+                        if (match && match[2].length === 11) thumbUrl = `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
+                      } else if ((project as any).googleDriveId) {
+                        thumbUrl = `https://drive.google.com/thumbnail?id=${(project as any).googleDriveId}&sz=w1280`;
+                      }
+
+                      if (!thumbUrl) return null;
+
+                      return (
+                        <>
+                          <img src={thumbUrl} alt={project.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 scale-100 group-hover:scale-105" />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500"></div>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-20 h-20 border border-white/30 backdrop-blur-sm text-white rounded-full flex items-center justify-center pl-1 group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300 shadow-xl">
+                              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                   
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                    <div>
-                      <div className="flex items-center gap-6 mb-4">
-                        <span className="text-brand-red font-mono font-bold">{project.id}</span>
-                        <span className="text-xs uppercase tracking-widest font-bold text-white/50">{project.category}</span>
-                      </div>
-                      <h3 className="text-4xl md:text-6xl font-display font-bold tracking-tight group-hover:text-brand-red transition-colors duration-300">
+                  <div className="flex flex-col gap-2 relative z-10">
+                    <div className="text-xs font-bold uppercase tracking-widest text-brand-red">
+                      {project.category}
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <h3 className="text-3xl md:text-5xl font-display font-bold group-hover:text-brand-red transition-colors duration-300">
                         {project.name}
                       </h3>
                     </div>
-                    <div className="text-right">
-                      <p className="text-lg text-white/60 mb-2">Client</p>
-                      <p className="text-xl font-bold">{project.client}</p>
+                    <div className="text-white/60 font-medium">
+                      {project.client}
                     </div>
                   </div>
-                </Link>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
           </div>
         </div>
       </section>
@@ -344,5 +388,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }
