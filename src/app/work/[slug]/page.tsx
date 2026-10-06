@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
   return (
     <div className="pt-32 pb-24 min-h-screen bg-brand-bg text-brand-ink">
     <div className="container mx-auto px-6 md:px-12 max-w-7xl mb-16 text-center">
-      <div className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">{project.category}</div>
+      <div className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">{(project as any).category}</div>
       <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-4 text-balance">
         {project.title}
       </h1>

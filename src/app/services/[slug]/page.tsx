@@ -133,6 +133,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await params;
   const service = servicesData[resolvedParams.slug as keyof typeof servicesData];
   if (!service) return { title: "Service Not Found" };
 
