@@ -17,9 +17,22 @@ export default function Navigation() {
 
   const navLinks = [
     { name: "Work", href: "/work" },
-    { name: "Services", href: "/services" },
     { name: "About", href: "/about" },
     { name: "Insights", href: "/insights" },
+  ];
+
+  const serviceLinks = [
+    { name: "Brand & Visual Design", href: "/services/brand-visual-design" },
+    { name: "Branded Content", href: "/services/branded-content" },
+    { name: "Campaign Production", href: "/services/campaign-production" },
+    { name: "Commercial Production", href: "/services/commercial-production" },
+    { name: "Content Marketing", href: "/services/content-marketing" },
+    { name: "Creative Direction", href: "/services/creative-direction" },
+    { name: "Performance Marketing", href: "/services/performance-marketing" },
+    { name: "Post-Production", href: "/services/post-production" },
+    { name: "Social Media Marketing", href: "/services/social-media-marketing" },
+    { name: "Visual Storytelling", href: "/services/visual-storytelling" },
+    { name: "Website Development", href: "/services/website-development" },
   ];
 
   return (
@@ -130,11 +143,18 @@ export default function Navigation() {
                 </div>
                 
                 <div>
-                  <h4 className="text-sm font-bold uppercase tracking-widest text-brand-red mb-4">Social</h4>
-                  <div className="flex flex-col gap-3">
-                    <a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">Instagram</a>
-                    <a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">LinkedIn</a>
-                    <a href="#" className="text-[clamp(1rem,1.5vw,1.25rem)] font-sans font-medium text-white/80 hover:text-white transition-colors">Vimeo</a>
+                  <Link href="/services" className="text-sm font-bold uppercase tracking-widest text-brand-red hover:text-white transition-colors mb-4 block" onClick={() => setIsOpen(false)}>Services</Link>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {serviceLinks.map((link) => (
+                      <Link 
+                        key={link.name} 
+                        href={link.href}
+                        className="text-[clamp(0.85rem,1.25vw,1rem)] font-sans font-medium text-white/70 hover:text-white hover:translate-x-1 transition-all"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </motion.div>

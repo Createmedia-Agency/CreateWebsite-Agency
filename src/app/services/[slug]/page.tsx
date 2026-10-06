@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Script from "next/script";
+import Image from "next/image";
 
 const servicesData = {
   "brand-visual-design": {
@@ -168,7 +169,8 @@ export default function ServicePage({ params }: Props) {
       "name": "CREATE",
       "url": "https://createforbrands.com"
     },
-    "description": service.description
+    "description": service.description,
+    "image": `https://createforbrands.com/images/services/${params.slug}.webp`
   };
 
   return (
@@ -183,18 +185,27 @@ export default function ServicePage({ params }: Props) {
       {/* Hero */}
       <section className="px-6 md:px-12 mb-32 container mx-auto max-w-7xl pt-16">
         <div className="max-w-4xl">
-          <Link 
-            href="/services" 
-            className="text-brand-red font-bold uppercase tracking-widest text-xs mb-8 inline-block hover:opacity-70 transition-opacity"
-          >
-            ← All Services
-          </Link>
+          <nav className="text-white/50 font-bold uppercase tracking-widest text-[10px] mb-8 flex flex-wrap items-center gap-2"><Link href="/" className="hover:text-brand-red transition-colors">Home</Link><span className="opacity-50">/</span><Link href="/services" className="hover:text-brand-red transition-colors">Services</Link><span className="opacity-50">/</span><span className="text-brand-red">{service.name}</span></nav>
           <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight leading-tight mb-8">
             {service.title}
           </h1>
           <p className="text-xl md:text-2xl text-white/70 font-medium leading-relaxed max-w-3xl">
             {service.intro}
           </p>
+        </div>
+      </section>
+
+      {/* Hero Image */}
+      <section className="px-6 md:px-12 mb-32 container mx-auto max-w-7xl">
+        <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#111]">
+          <Image 
+            src={`/images/services/${params.slug}.webp`}
+            alt={`${service.name} - CREATE Studio`}
+            fill
+            sizes="(max-width: 768px) 100vw, 1200px"
+            className="object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700"
+            priority
+          />
         </div>
       </section>
 
@@ -251,3 +262,4 @@ export default function ServicePage({ params }: Props) {
     </div>
   );
 }
+
