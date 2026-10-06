@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const services = [
-    'brand-visual-design',
+    'brand-and-visual-design',
     'branded-content',
     'campaign-production',
     'commercial-production',
