@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 // Define the exact portfolio data locally since we don't have Supabase hooked up yet
 const portfolioDb = {
   "shiv-immersive": {
-    title: "Shiv Immersive Reels",
+    title: "Shiv Immersive",
     client: "Shiv Immersive",
     budget: null,
     timeline: null,
@@ -17,8 +17,8 @@ const portfolioDb = {
       "https://www.instagram.com/reel/DdEfxbtgt2B/embed",
       "https://www.instagram.com/reel/DdMcOrNOzeM/embed"
     ],
-    brief: "A series of immersive Instagram reels produced for Shiv Immersive.",
-    services: ["Production", "Social Media", "Post-Production"]
+    brief: "We developed and executed the influencer marketing strategy for Shiv Immersive, from campaign ideation and content concepts to creator scripting and short-form execution.",
+    services: ["Social Media Marketing", "Influencer Marketing", "Branded Content", "Creative Direction", "Content Marketing"]
   },
   "balidaan-diwas": {
     title: "Bhagat Singh Memorial Day",

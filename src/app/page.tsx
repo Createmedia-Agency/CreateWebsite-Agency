@@ -4,6 +4,7 @@ import { ArrowIcon } from "@/components/ArrowIcon";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { VideoModal } from "@/components/VideoModal";
 
@@ -60,9 +61,9 @@ export default function Home() {
     },
     { 
       id: "04", 
-      name: "Shiv Immersive Reels", 
+      name: "Shiv Immersive", 
       client: "Shiv Immersive",
-      category: "Reels / Social Video",
+      category: "Influencer Marketing · Ideation · Scripting",
       youtubeUrl: "",
       image: "/images/services/social-media-marketing.webp",
       slug: "shiv-immersive"
@@ -316,6 +317,7 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Client Logos */}
       <section className="py-24 bg-brand-bg border-t border-white/5 overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl mb-12 text-center">
@@ -324,21 +326,276 @@ export default function Home() {
         
         <div className="relative flex overflow-x-hidden group">
           <div className="py-8 animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-32 px-8">
-            {["Government of Meghalaya", "W.H Warehouse", "Sharda International School", "PWD Delhi", "No Label", "Sabrini", "P&G", "BRB", "Tipsy Tiger", "Troovy", "Wellbeing Nutrition", "Red Bull", "IIAC", "PW", "Protiviti", "AIESEC", "TrustERRA", "Korean Cultural Centre", "JhaJi"].map((client, i) => (
-              <span key={i} className="text-2xl md:text-4xl font-display font-bold text-white/20 hover:text-white transition-colors duration-300">
-                {client}
-              </span>
+            {[
+  {
+    "name": "Government of Meghalaya",
+    "src": "government-of-meghalaya",
+    "w": 160,
+    "h": 145
+  },
+  {
+    "name": "W.H Warehouse",
+    "src": "wh-warehouse",
+    "w": 166,
+    "h": 142
+  },
+  {
+    "name": "Sharda International School",
+    "src": "sharda-international-school",
+    "w": 158,
+    "h": 138
+  },
+  {
+    "name": "PWD Delhi",
+    "src": "pwd-delhi",
+    "w": 162,
+    "h": 143
+  },
+  {
+    "name": "No Label",
+    "src": "no-label",
+    "w": 104,
+    "h": 61
+  },
+  {
+    "name": "Sabrini",
+    "src": "sabrini",
+    "w": 155,
+    "h": 156
+  },
+  {
+    "name": "P&G",
+    "src": "pg",
+    "w": 155,
+    "h": 156
+  },
+  {
+    "name": "BRB",
+    "src": "brb",
+    "w": 107,
+    "h": 139
+  },
+  {
+    "name": "Tipsy Tiger",
+    "src": "tipsy-tiger",
+    "w": 157,
+    "h": 156
+  },
+  {
+    "name": "Troovy",
+    "src": "troovy",
+    "w": 157,
+    "h": 136
+  },
+  {
+    "name": "Wellbeing Nutrition",
+    "src": "wellbeing-nutrition",
+    "w": 149,
+    "h": 155
+  },
+  {
+    "name": "Red Bull",
+    "src": "red-bull",
+    "w": 155,
+    "h": 155
+  },
+  {
+    "name": "IIAC",
+    "src": "iiac",
+    "w": 147,
+    "h": 135
+  },
+  {
+    "name": "PW",
+    "src": "pw",
+    "w": 149,
+    "h": 155
+  },
+  {
+    "name": "Protiviti",
+    "src": "protiviti",
+    "w": 151,
+    "h": 155
+  },
+  {
+    "name": "AIESEC",
+    "src": "aiesec",
+    "w": 150,
+    "h": 153
+  },
+  {
+    "name": "TrustERRA",
+    "src": "trustterra",
+    "w": 146,
+    "h": 153
+  },
+  {
+    "name": "Korea Agro-Fisheries",
+    "src": "korea-agro-fisheries",
+    "w": 149,
+    "h": 150
+  },
+  {
+    "name": "Korean Cultural Centre",
+    "src": "korean-cultural-centre",
+    "w": 149,
+    "h": 153
+  },
+  {
+    "name": "JhaJi",
+    "src": "jha-ji",
+    "w": 140,
+    "h": 151
+  }
+].map((client, i) => (
+              <div key={i} className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 w-auto">
+                <Image 
+                  src={`/images/clients/${client.src}.webp`} 
+                  alt={`${client.name} logo`}
+                  width={client.w}
+                  height={client.h}
+                  className="max-h-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300" 
+                />
+              </div>
             ))}
           </div>
-          <div className="absolute top-0 py-8 animate-marquee2 whitespace-nowrap flex items-center gap-16 md:gap-32 px-8">
-            {["Government of Meghalaya", "W.H Warehouse", "Sharda International School", "PWD Delhi", "No Label", "Sabrini", "P&G", "BRB", "Tipsy Tiger", "Troovy", "Wellbeing Nutrition", "Red Bull", "IIAC", "PW", "Protiviti", "AIESEC", "TrustERRA", "Korean Cultural Centre", "JhaJi"].map((client, i) => (
-              <span key={i} className="text-2xl md:text-4xl font-display font-bold text-white/20 hover:text-white transition-colors duration-300">
-                {client}
-              </span>
+          <div className="absolute top-0 py-8 animate-marquee2 whitespace-nowrap flex items-center gap-16 md:gap-32 px-8" aria-hidden="true">
+            {[
+  {
+    "name": "Government of Meghalaya",
+    "src": "government-of-meghalaya",
+    "w": 160,
+    "h": 145
+  },
+  {
+    "name": "W.H Warehouse",
+    "src": "wh-warehouse",
+    "w": 166,
+    "h": 142
+  },
+  {
+    "name": "Sharda International School",
+    "src": "sharda-international-school",
+    "w": 158,
+    "h": 138
+  },
+  {
+    "name": "PWD Delhi",
+    "src": "pwd-delhi",
+    "w": 162,
+    "h": 143
+  },
+  {
+    "name": "No Label",
+    "src": "no-label",
+    "w": 104,
+    "h": 61
+  },
+  {
+    "name": "Sabrini",
+    "src": "sabrini",
+    "w": 155,
+    "h": 156
+  },
+  {
+    "name": "P&G",
+    "src": "pg",
+    "w": 155,
+    "h": 156
+  },
+  {
+    "name": "BRB",
+    "src": "brb",
+    "w": 107,
+    "h": 139
+  },
+  {
+    "name": "Tipsy Tiger",
+    "src": "tipsy-tiger",
+    "w": 157,
+    "h": 156
+  },
+  {
+    "name": "Troovy",
+    "src": "troovy",
+    "w": 157,
+    "h": 136
+  },
+  {
+    "name": "Wellbeing Nutrition",
+    "src": "wellbeing-nutrition",
+    "w": 149,
+    "h": 155
+  },
+  {
+    "name": "Red Bull",
+    "src": "red-bull",
+    "w": 155,
+    "h": 155
+  },
+  {
+    "name": "IIAC",
+    "src": "iiac",
+    "w": 147,
+    "h": 135
+  },
+  {
+    "name": "PW",
+    "src": "pw",
+    "w": 149,
+    "h": 155
+  },
+  {
+    "name": "Protiviti",
+    "src": "protiviti",
+    "w": 151,
+    "h": 155
+  },
+  {
+    "name": "AIESEC",
+    "src": "aiesec",
+    "w": 150,
+    "h": 153
+  },
+  {
+    "name": "TrustERRA",
+    "src": "trustterra",
+    "w": 146,
+    "h": 153
+  },
+  {
+    "name": "Korea Agro-Fisheries",
+    "src": "korea-agro-fisheries",
+    "w": 149,
+    "h": 150
+  },
+  {
+    "name": "Korean Cultural Centre",
+    "src": "korean-cultural-centre",
+    "w": 149,
+    "h": 153
+  },
+  {
+    "name": "JhaJi",
+    "src": "jha-ji",
+    "w": 140,
+    "h": 151
+  }
+].map((client, i) => (
+              <div key={i} className="flex-shrink-0 flex items-center justify-center h-16 md:h-20 w-auto">
+                <Image 
+                  src={`/images/clients/${client.src}.webp`} 
+                  alt=""
+                  width={client.w}
+                  height={client.h}
+                  className="max-h-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300" 
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* 8. Insights Preview */}
       <section className="py-32 bg-[#050505] px-6 md:px-12 border-t border-white/5">

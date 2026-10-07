@@ -29,10 +29,10 @@ const portfolio = [
     aspectRatio: "aspect-[16/9]",
   },
   {
-    title: "Shiv Immersive Reels",
+    title: "Shiv Immersive",
     slug: "shiv-immersive",
     client: "Shiv Immersive",
-    category: "Reels / Social Video",
+    category: "Influencer Marketing · Ideation · Scripting",
     reels: [
       { url: "https://www.instagram.com/reel/DdEaYGZJtdM/embed", thumbnail: "/images/services/social-media-marketing.webp" },
       { url: "https://www.instagram.com/reel/DdHNNxMhDTi/embed", thumbnail: "/images/services/content-marketing.webp" },
