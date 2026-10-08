@@ -83,7 +83,7 @@ export async function POST(req: Request) {
   try {
     // Rate limiting
     const forwarded = req.headers.get("x-forwarded-for");
-    const ip = forwarded?.split(",")[0]?.trim() || "unknown";
+    const ip = forwarded?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
     if (isRateLimited(ip)) {
       return NextResponse.json(
         { error: "Too many submissions. Please try again later." },
@@ -121,6 +121,10 @@ export async function POST(req: Request) {
     const honeypot = sanitizeString(body._gotcha);
     if (honeypot) {
       return NextResponse.json({ success: true, message: "Lead submitted successfully." });
+    }
+
+    if (body.consent !== true) {
+      return NextResponse.json({ error: "You must consent to the privacy policy." }, { status: 400 });
     }
 
     if (!name || !email || !message) {

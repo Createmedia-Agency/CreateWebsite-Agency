@@ -43,7 +43,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-medium tracking-widest uppercase opacity-40 border-t border-white/10 pt-8">
           <p>&copy; {new Date().getFullYear()} CREATE. ALL RIGHTS RESERVED.</p>
           <div className="flex gap-8">
-            <Link href="/admin" className="hover:text-brand-red transition-colors">Admin Login</Link>
+            
           </div>
         </div>
       </div>

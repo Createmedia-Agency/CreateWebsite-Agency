@@ -11,6 +11,31 @@ interface VideoModalProps {
   } | null;
 }
 
+
+function getSafeUrl(url: string, type: 'youtube' | 'drive' | 'url'): string {
+  try {
+    if (type === 'youtube') {
+      // Validate that the ID is strictly alphanumeric/underscores/hyphens
+      if (!/^[a-zA-Z0-9_-]{11}$/.test(url)) return '';
+      return `https://www.youtube.com/embed/${url}?autoplay=1&rel=0`;
+    }
+    if (type === 'drive') {
+      if (!/^[a-zA-Z0-9_-]+$/.test(url)) return '';
+      return `https://drive.google.com/file/d/${url}/preview`;
+    }
+    if (type === 'url') {
+      const parsed = new URL(url);
+      if (parsed.protocol !== 'https:') return '';
+      const allowedDomains = ['www.youtube.com', 'youtube.com', 'www.instagram.com', 'instagram.com', 'drive.google.com'];
+      if (!allowedDomains.includes(parsed.hostname)) return '';
+      return parsed.toString();
+    }
+  } catch (e) {
+    return '';
+  }
+  return '';
+}
+
 export function VideoModal({ isOpen, onClose, video }: VideoModalProps) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -57,7 +82,7 @@ export function VideoModal({ isOpen, onClose, video }: VideoModalProps) {
           >
             {video.type === 'youtube' && (
               <iframe 
-                src={`https://www.youtube.com/embed/${video.idOrUrl}?autoplay=1&rel=0`} 
+                src={getSafeUrl(video.idOrUrl, "youtube")} 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
                 className="w-full h-full border-0 absolute inset-0"
@@ -65,7 +90,7 @@ export function VideoModal({ isOpen, onClose, video }: VideoModalProps) {
             )}
             {video.type === 'drive' && (
               <iframe 
-                src={`https://drive.google.com/file/d/${video.idOrUrl}/preview`} 
+                src={getSafeUrl(video.idOrUrl, "drive")} 
                 allow="autoplay" 
                 allowFullScreen
                 className="w-full h-full border-0 absolute inset-0"
@@ -73,7 +98,7 @@ export function VideoModal({ isOpen, onClose, video }: VideoModalProps) {
             )}
             {video.type === 'url' && (
               <iframe 
-                src={video.idOrUrl} 
+                src={getSafeUrl(video.idOrUrl, "url")} 
                 allow="autoplay; encrypted-media" 
                 allowFullScreen
                 className="w-full h-full border-0 absolute inset-0"

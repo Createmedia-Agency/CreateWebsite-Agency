@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +13,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "", company: "", email: "", phone: "", website: "",
     projectType: "", budget: "", message: "", _gotcha: ""
-  });
+  , consent: false });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -178,6 +179,13 @@ export default function ContactPage() {
                 <div style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }} aria-hidden="true" tabIndex={-1}>
                   <label htmlFor="_gotcha">Do not fill this</label>
                   <input type="text" id="_gotcha" name="_gotcha" value={formData._gotcha} onChange={handleChange} autoComplete="off" tabIndex={-1} />
+                </div>
+
+                <div className="flex items-start gap-4 mt-6">
+                  <input required type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleChange} className="mt-1 accent-brand-red w-4 h-4 cursor-pointer" />
+                  <label htmlFor="consent" className="text-sm text-white/70 leading-relaxed cursor-pointer">
+                    I agree to CREATE collecting and using the information provided above to respond to my enquiry and communicate with me about its services. For details on how we handle your data, please see our <Link href="/privacy" className="text-brand-red hover:underline">Privacy Policy</Link>.
+                  </label>
                 </div>
 
                 <button 
