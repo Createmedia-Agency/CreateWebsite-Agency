@@ -53,7 +53,7 @@ export default function PrivacyPage() {
             <li>Withdraw consent at any time.</li>
           </ul>
           <p>
-            To exercise any of these rights, please contact our Data Protection Officer / Privacy Team at <strong>privacy@createforbrands.com</strong> (subject to business configuration) or <strong>createforbrands@gmail.com</strong>. All requests will be verified before action is taken.
+            To exercise any of these rights, please contact our Data Protection Officer / Privacy Team at <strong>createforbrands@gmail.com</strong>. All requests will be verified before action is taken.
           </p>
 
           <h2 className="text-2xl font-bold text-white mt-12 mb-4">6. Grievance Redressal</h2>

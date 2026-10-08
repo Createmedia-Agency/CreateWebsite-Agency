@@ -184,7 +184,7 @@ export default function ContactPage() {
                 <div className="flex items-start gap-4 mt-6">
                   <input required type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleChange} className="mt-1 accent-brand-red w-4 h-4 cursor-pointer" />
                   <label htmlFor="consent" className="text-sm text-white/70 leading-relaxed cursor-pointer">
-                    I agree to CREATE collecting and using the information provided above to respond to my enquiry and communicate with me about its services. For details on how we handle your data, please see our <Link href="/privacy" className="text-brand-red hover:underline">Privacy Policy</Link>.
+                    We collect your name, email address and message to respond to your enquiry. By submitting this form, you consent to this processing as described in our <Link href="/privacy" className="text-brand-red hover:underline">Privacy Policy</Link>.
                   </label>
                 </div>
 

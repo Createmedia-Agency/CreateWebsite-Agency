@@ -81,7 +81,9 @@ function isValidEmail(email: string): boolean {
 // ──────────────────────────────────────────────
 export async function POST(req: Request) {
   try {
-    // Rate limiting
+    // BEST-EFFORT LOCAL RATE LIMITING
+    // In a serverless environment (Vercel), this Map resets frequently on cold starts.
+    // Production abuse protection is UNVERIFIED until a distributed cache (e.g. Vercel KV) is implemented.
     const forwarded = req.headers.get("x-forwarded-for");
     const ip = forwarded?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
     if (isRateLimited(ip)) {
@@ -155,7 +157,10 @@ export async function POST(req: Request) {
         message,
         source: "CREATE Website",
         status: "NEW",
-        email_status: "PENDING"
+        email_status: "PENDING",
+        consent_given: true,
+        consent_timestamp: new Date().toISOString(),
+        consent_policy_version: "v1"
       }]);
 
       if (error) {
